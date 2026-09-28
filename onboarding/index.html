@@ -148,48 +148,34 @@ winget install Gyan.FFmpeg</pre></div>
   <section class="step" id="p4" data-step="p4">
     <div class="step-head">
       <button class="step-check" type="button" role="checkbox" aria-checked="false" aria-label="Marcar passo 4 como concluído"><span class="num">4</span></button>
-      <div><h2>Instalar o pacote de skills pelo GitHub</h2><p class="desc">As skills da OdontoRise vivem num repositório privado no GitHub. Você clona uma vez com o GitHub Desktop e roda um instalador. Atualizar depois é um clique.</p></div>
+      <div><h2>Instalar o pacote de skills</h2><p class="desc">Um comando no terminal. Ele baixa o pacote da OdontoRise, cria a sua pasta de trabalho e liga as skills ao Claude Code. Sem conta, sem convite.</p></div>
     </div>
     <div class="card">
-      <h3>A. Conta e convite (uma vez)</h3>
-      <ol>
-        <li>Crie uma conta gratuita em <a href="https://github.com/signup" target="_blank" rel="noopener">github.com</a> com o seu e-mail @odontorise.com e mande o seu nome de usuário ao Lucas.</li>
-        <li>Ele convida você para o repositório privado. Aceite o convite pelo e-mail que chega do GitHub. Sem o convite, o repositório não aparece.</li>
-      </ol>
-      <h3>B. Clonar com o GitHub Desktop</h3>
-      <ol>
-        <li>Instale o <a href="https://desktop.github.com/" target="_blank" rel="noopener">GitHub Desktop</a> e entre com a sua conta.</li>
-        <li><strong>File → Clone repository</strong> → aba <strong>GitHub.com</strong> → escolha <code>meta-ads-odontorise</code>.</li>
-        <li>Em <strong>Local path</strong>, aponte para a pasta de skills do Claude Code e clique em <strong>Clone</strong>:</li>
-      </ol>
+      <h3>A. Rodar o instalador</h3>
       <div class="os-tabs" role="radiogroup" aria-label="Sistema operacional"><button type="button" data-os="mac" role="radio" aria-checked="false">macOS</button><button type="button" data-os="win" role="radio" aria-checked="false">Windows</button></div>
       <div class="os-panel" data-os="mac">
-        <div class="code"><div class="code-head"><span>local path</span><button class="copy-btn" type="button">Copiar</button></div><pre>~/.claude/skills/meta-ads-odontorise</pre></div>
-        <p>A pasta <code>.claude</code> é oculta. Se o GitHub Desktop não a mostrar, cole o caminho acima na caixa de texto em vez de navegar.</p>
+        <p>Abra o app <strong>Terminal</strong> (Cmd+Espaço, digite Terminal, Enter), cole a linha abaixo e aperte Enter:</p>
+        <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre>curl -fsSL https://raw.githubusercontent.com/lucastelestrabalho777-ux/meta-ads-odontorise/main/instalar.sh | bash</pre></div>
       </div>
       <div class="os-panel" data-os="win">
-        <div class="code"><div class="code-head"><span>local path</span><button class="copy-btn" type="button">Copiar</button></div><pre>C:\Users\SEU-NOME\.claude\skills\meta-ads-odontorise</pre></div>
-        <p>Troque <code>SEU-NOME</code> pelo nome da sua pasta de usuário. Se a pasta <code>.claude</code> ainda não existir, o GitHub Desktop cria.</p>
+        <p>Abra o <strong>PowerShell</strong> (tecla Win, digite PowerShell, Enter), cole a linha abaixo e aperte Enter:</p>
+        <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>irm https://raw.githubusercontent.com/lucastelestrabalho777-ux/meta-ads-odontorise/main/instalar.ps1 | iex</pre></div>
       </div>
-      <h3>C. Rodar o instalador (uma vez)</h3>
-      <p>Ele cria a pasta <code>OdontoRise</code> na sua pasta pessoal (regras da casa, <code>credentials/</code> e <code>meta-ads/</code>), liga cada skill do pacote ao Claude Code e instala a biblioteca da Meta. Não mexe em credencial nem em conta.</p>
-      <div class="os-panel" data-os="mac">
-        <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre>bash ~/.claude/skills/meta-ads-odontorise/instalar.sh</pre></div>
-      </div>
-      <div class="os-panel" data-os="win">
-        <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>powershell -ExecutionPolicy Bypass -File "$HOME\.claude\skills\meta-ads-odontorise\instalar.ps1"</pre></div>
-      </div>
-      <div class="code"><div class="code-head"><span>estrutura criada</span></div><pre>~/OdontoRise/
+      <p>O que deve aparecer no fim: <code>biblioteca da Meta ok</code> e <code>Pronto. Próximos passos: credenciais (passo 6 e 8 do guia)</code>. Leva de 1 a 3 minutos na primeira vez.</p>
+      <div class="code"><div class="code-head"><span>o que o instalador cria</span></div><pre>~/.claude/skills/meta-ads-odontorise/   <span class="c">o pacote (skills, scripts, playbooks), baixado do GitHub</span>
+~/.claude/skills/&lt;cada skill&gt;             <span class="c">atalhos para as skills do pacote</span>
+~/OdontoRise/
 ├── CLAUDE.md        <span class="c">regras da casa que o Claude lê em toda sessão</span>
 ├── credentials/     <span class="c">SÓ os seus arquivos de credencial (passos 6 e 8). Nunca compartilhada, nunca enviada.</span>
 └── meta-ads/        <span class="c">cadastro de clientes, aprendizados e auditoria; a skill cria sozinha</span></pre></div>
-      <ol start="4">
-        <li>Abra a pasta no VS Code: <strong>Arquivo → Abrir Pasta</strong> → <code>OdontoRise</code>. Ou, no terminal, <code>code ~/OdontoRise</code>.</li>
+      <h3>B. Abrir a pasta no VS Code</h3>
+      <ol>
+        <li><strong>Arquivo → Abrir Pasta</strong> → <code>OdontoRise</code> (na sua pasta pessoal). Ou, no terminal, <code>code ~/OdontoRise</code>.</li>
         <li>Abra o painel do Claude Code. Como a pasta tem um <code>CLAUDE.md</code>, o Claude já começa com as regras da casa carregadas.</li>
       </ol>
-      <h3>D. Atualizar (sempre que o Lucas avisar)</h3>
-      <p>No GitHub Desktop: <strong>Fetch origin</strong> e depois <strong>Pull origin</strong>. As skills mudam na hora; não precisa rodar o instalador de novo, a não ser que uma skill nova tenha entrado no pacote.</p>
-      <div class="callout danger"><span class="ico">🔒</span><div>Nunca coloque credencial dentro da pasta do repositório: ela é compartilhada. Credencial vive só em <code>~/OdontoRise/credentials/</code>, criada por você nos passos 6 e 8.</div></div>
+      <h3>C. Atualizar (sempre que o Lucas avisar)</h3>
+      <p>Rode o mesmo comando de novo. Ele atualiza o pacote no lugar; as skills mudam na hora.</p>
+      <div class="callout danger"><span class="ico">🔒</span><div>Nunca coloque credencial dentro da pasta do pacote: ela é pública. Credencial vive só em <code>~/OdontoRise/credentials/</code>, criada por você nos passos 6 e 8.</div></div>
     </div>
   </section>
 
@@ -203,7 +189,7 @@ winget install Gyan.FFmpeg</pre></div>
       <p>Skill é um pacote de instruções e scripts que faz o Claude executar uma rotina inteira: puxar dados, cruzar, entregar pronto. A lista do que cada papel recebe está nas páginas <a href="../gestores/">Gestores</a>, <a href="../head/">Head</a> e <a href="../cs/">CS</a>.</p>
       <ol>
         <li>No VS Code, com a pasta <code>OdontoRise</code> aberta, digite <code>/skills</code> no chat do Claude. Devem aparecer <code>meta-ads-odontorise</code>, <code>meu-dia</code>, <code>legenda-video</code>, <code>resumo-reuniao</code> e <code>agendar-reuniao</code>.</li>
-        <li>Se não aparecerem, feche e reabra o painel do Claude. Se ainda assim faltarem, rode o instalador do passo 4 de novo e confira se o clone está em <code>~/.claude/skills/meta-ads-odontorise</code>.</li>
+        <li>Se não aparecerem, feche e reabra o painel do Claude. Se ainda assim faltarem, rode o comando do passo 4 de novo.</li>
       </ol>
       <h3>Como funciona por dentro</h3>
       <div class="tbl"><table>
@@ -478,7 +464,7 @@ Invoke-RestMethod $u</pre></div>
         <li><em>"Rode o setup da skill Meta."</em> Resultado esperado: a conferência do ambiente termina em <strong>TUDO PRONTO</strong>, com o seu nome e a quantidade de contas que você enxerga. Se terminar em AINDA NÃO, a lista numerada diz o que falta e em qual parte do passo 6 resolver.</li>
         <li><em>"Cadastra o cliente NOME."</em> Use um cliente da sua carteira. Resultado esperado: o Claude acha o perfil no ClickUp, mostra cidade, especialidade e Instagram, e pergunta qual é a conta de anúncio do Meta desse cliente. Escolha da lista e confirme.</li>
       </ol>
-      <div class="callout"><span class="ico">💡</span><div>Se o primeiro pedido disser que a skill não existe, volte ao passo 4: o clone precisa estar na pasta de skills e o instalador precisa ter rodado. Se o segundo não achar o cliente, confira o nome no Perfil de Clientes do ClickUp.</div></div>
+      <div class="callout"><span class="ico">💡</span><div>Se o primeiro pedido disser que a skill não existe, volte ao passo 4 e rode o comando de novo. Se o segundo não achar o cliente, confira o nome no Perfil de Clientes do ClickUp.</div></div>
     </div>
   </section>
 
@@ -499,7 +485,7 @@ Invoke-RestMethod $u</pre></div>
     <div class="tbl"><table>
       <tr><th>Sintoma</th><th>Causa provável</th><th>O que fazer</th></tr>
       <tr><td>"Sign in" não conclui ou pede plano</td><td>seu e-mail ainda não tem assento na organização</td><td>pedir ao administrador da org Claude Team que envie o convite</td></tr>
-      <tr><td>Digito <code>/skills</code> e as skills da OdontoRise não aparecem</td><td>clone fora de <code>~/.claude/skills/meta-ads-odontorise</code>, ou instalador não rodado</td><td>conferir o Local path no GitHub Desktop e rodar o instalador (passo 4, C); fechar e reabrir o painel</td></tr>
+      <tr><td>Digito <code>/skills</code> e as skills da OdontoRise não aparecem</td><td>instalador não rodou até o fim</td><td>rodar o comando do passo 4 de novo e ler a última linha; fechar e reabrir o painel</td></tr>
       <tr><td><code>python3: command not found</code> (Mac)</td><td>Homebrew ou Python não instalados, ou terminal não reaberto</td><td>repetir o passo 3; fechar e reabrir o terminal</td></tr>
       <tr><td><code>externally-managed-environment</code> no pip</td><td>Python do Homebrew protege os pacotes do sistema</td><td>acrescentar <code>--break-system-packages</code> ao comando do pip</td></tr>
       <tr><td>Meta responde <code>OAuthException</code> / código 190</td><td>token colado errado, com espaço, ou revogado</td><td>refazer a parte 3 do passo 6 e colar o token novo na primeira linha do arquivo</td></tr>
