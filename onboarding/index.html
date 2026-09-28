@@ -36,7 +36,6 @@
     <div class="metrics">
       <div><strong>~40 min</strong>tempo estimado</div>
       <div><strong>10 passos</strong>com checkpoint</div>
-      <div><strong>v21.0</strong>Meta Graph API, válida até 21/01/2027</div>
     </div>
   </div>
 </header>
@@ -44,7 +43,7 @@
 <main class="container">
   <p class="intro">Clique no número de cada passo para marcar como concluído. O progresso e o checklist final ficam salvos neste navegador. Os comandos aparecem na aba do seu sistema; troque de aba se precisar.</p>
 
-  <div class="callout warn"><span class="ico">⚠️</span><div><strong>Antes de começar:</strong> você precisa de um assento ativo no Claude Team da OdontoRise (convite no seu e-mail @odontorise.com). Sem o assento, o login do passo 2 não funciona. Em 21/09/2026 existe 1 assento; os próximos são liberados pelo administrador da organização.</div></div>
+  <div class="callout warn"><span class="ico">⚠️</span><div><strong>Antes de começar:</strong> você precisa de um assento ativo no Claude Team da OdontoRise (convite no seu e-mail @odontorise.com). Sem o assento, o login do passo 2 não funciona. Os assentos são liberados pelo administrador da organização.</div></div>
 
   <!-- 1 -->
   <section class="step" id="p1" data-step="p1">
@@ -94,7 +93,7 @@
         <li>Entre com o seu e-mail <strong>@odontorise.com</strong>. Se aparecer mais de uma organização, escolha <strong>Odontorise</strong>.</li>
         <li>Autorize e volte ao VS Code. O painel passa a mostrar o chat.</li>
       </ol>
-      <div class="callout danger"><span class="ico">🚫</span><div>Nunca entre com a conta pessoal de outra pessoa nem com a conta do Lucas. O assento é seu: os conectores, as permissões e a memória seguem o login.</div></div>
+      <div class="callout danger"><span class="ico">🚫</span><div>Nunca entre com a conta de outra pessoa. O assento é seu: os conectores, as permissões e a memória seguem o login.</div></div>
       <h3>Opcional: o comando <code>claude</code> no terminal</h3>
       <p>Faz a mesma coisa que o painel, dentro do terminal. Instruções oficiais em <a href="https://code.claude.com/docs/en/setup" target="_blank" rel="noopener">code.claude.com/docs/en/setup</a>. Se instalar, rode <code>claude</code> dentro de <code>~/OdontoRise</code> e faça <code>/login</code> com o mesmo e-mail.</p>
     </div>
@@ -139,7 +138,7 @@ python3 -m pip install --user requests python-dotenv facebook-business==26.0.2</
 winget install Python.Python.3.12
 winget install Gyan.FFmpeg</pre></div>
         <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>python -m pip install --user requests python-dotenv facebook-business==26.0.2</pre></div>
-        <div class="callout warn"><span class="ico">⚠️</span><div>No Windows, feche e reabra o PowerShell depois de instalar (a lista de programas que o sistema conhece só atualiza em janela nova). Se <code>python</code> não for reconhecido, reinicie o computador e tente de novo. Em 21/09/2026 a skill <code>/legenda-video</code> roda só em Mac com chip Apple (transcrição local); no Windows ela fica fora por enquanto.</div></div>
+        <div class="callout warn"><span class="ico">⚠️</span><div>No Windows, feche e reabra o PowerShell depois de instalar (a lista de programas que o sistema conhece só atualiza em janela nova). Se <code>python</code> não for reconhecido, reinicie o computador e tente de novo. A skill <code>/legenda-video</code> transcreve o vídeo na própria máquina: no Mac com chip Apple usa o mlx-whisper; no Windows, o faster-whisper. A instalação do motor está descrita na própria skill.</div></div>
       </div>
     </div>
   </section>
@@ -173,7 +172,7 @@ winget install Gyan.FFmpeg</pre></div>
         <li><strong>Arquivo → Abrir Pasta</strong> → <code>OdontoRise</code> (na sua pasta pessoal). Ou, no terminal, <code>code ~/OdontoRise</code>.</li>
         <li>Abra o painel do Claude Code. Como a pasta tem um <code>CLAUDE.md</code>, o Claude já começa com as regras da casa carregadas.</li>
       </ol>
-      <h3>C. Atualizar (sempre que o Lucas avisar)</h3>
+      <h3>C. Atualizar (quando a agência avisar de uma atualização)</h3>
       <p>Rode o mesmo comando de novo. Ele atualiza o pacote no lugar; as skills mudam na hora.</p>
       <div class="callout danger"><span class="ico">🔒</span><div>Nunca coloque credencial dentro da pasta do pacote: ela é pública. Credencial vive só em <code>~/OdontoRise/credentials/</code>, criada por você nos passos 6 e 8.</div></div>
     </div>
@@ -198,7 +197,7 @@ winget install Gyan.FFmpeg</pre></div>
         <tr><td>Conector (MCP)</td><td>claude.ai → Configurações → Conectores</td><td>o "aplicativo" dentro do Claude: ClickUp, Drive, Calendar, Meta. Segue o seu login, não a pasta</td></tr>
         <tr><td>Suas credenciais</td><td><code>~/OdontoRise/credentials/</code></td><td>as skills leem daí; nunca ficam dentro do repositório</td></tr>
       </table></div>
-      <div class="callout"><span class="ico">💡</span><div>Não edite arquivos dentro do clone: a próxima atualização sobrescreve. Correção ou ideia de melhoria: mande ao Lucas, que publica para todo mundo.</div></div>
+      <div class="callout"><span class="ico">💡</span><div>Não edite arquivos dentro do clone: a próxima atualização sobrescreve. Correção ou ideia de melhoria: mande à liderança, que publica para todo mundo.</div></div>
     </div>
   </section>
 
@@ -224,14 +223,14 @@ winget install Gyan.FFmpeg</pre></div>
         <li>No VS Code, feche e reabra o painel do Claude. Teste no chat: <em>"liste as contas de anúncio que você enxerga no Meta"</em>.</li>
       </ol>
 
-      <div class="callout warn"><span class="ico">⚠️</span><div>Em 21/09/2026 o conector Meta ainda não está habilitado na organização Claude Team da OdontoRise (depende do administrador da org). Até liberar, use só a credencial em arquivo (parte B).</div></div>
+      <div class="callout"><span class="ico">💡</span><div>Se o conector Meta aparecer com a opção de solicitar em vez de conectar, ele ainda não foi liberado pelo administrador da organização. Enquanto isso, a credencial em arquivo (parte B) atende tudo o que as skills fazem.</div></div>
 
       <h3>B. Seu aplicativo e seu token</h3>
       <p>Cada pessoa tem o <strong>próprio aplicativo</strong> e o <strong>próprio token</strong>. É isso que faz o histórico da conta registrar quem alterou o quê, e é o que deixa você independente: o aplicativo é seu, a chave secreta é sua, a renovação é sua. Nunca use o token de outra pessoa.</p>
 
-      <div class="callout"><span class="ico">💡</span><div>Dois gestores trabalhando ao mesmo tempo não atrapalham um ao outro. O Meta conta o uso por conta de anúncio, não por aplicativo, e sobra folga: medimos 1.220 chamadas por hora disponíveis numa conta de cliente, contra menos de 1% em uso hoje.</div></div>
+      <div class="callout"><span class="ico">💡</span><div>Dois gestores trabalhando ao mesmo tempo não atrapalham um ao outro: o Meta conta o uso por conta de anúncio, não por aplicativo, e o limite fica muito acima do que as skills usam.</div></div>
 
-      <div class="callout"><span class="ico">💡</span><div><strong>Por que um aplicativo por pessoa, e não o da agência?</strong> O aplicativo da OdontoRise, no nível de acesso que tem hoje, comporta um único usuário de sistema, e ele já está em uso. Quando ele subir de nível (Advanced Access), cada pessoa recebe um usuário de sistema e o token deixa de vencer. Nesse dia muda só o conteúdo do seu arquivo de credencial; o resto deste guia continua igual.</div></div>
+      <div class="callout"><span class="ico">💡</span><div><strong>Por que um aplicativo por pessoa?</strong> Cada pessoa gera e renova o próprio token sem depender de ninguém, e o histórico da conta registra quem fez o quê. Se a agência mudar o modelo de acesso no futuro, muda só o conteúdo do seu arquivo de credencial; o resto deste guia continua igual.</div></div>
 
       <p><strong>Parte 1, confira o seu acesso na Business Manager</strong> (você já tem; é só conferir):</p>
       <ol>
@@ -343,10 +342,9 @@ Invoke-RestMethod $u</pre></div>
 
       <h3>A renovação a cada 60 dias</h3>
       <p>Seu token vence em 60 dias. Renovar é repetir a parte 3 e trocar a primeira linha do arquivo: 5 minutos, sem administrador. Crie agora um lembrete no seu Google Calendar para daqui a 50 dias, repetindo a cada 50 dias. Se trocar a senha do Facebook, o token cai na hora: repita a parte 3 no mesmo dia.</p>
-      <div class="callout"><span class="ico">💡</span><div>Para saber quando o seu token vence, cole-o na Ferramenta de depuração e leia a linha <strong>Expira</strong>. A skill <code>/conectar-meta</code>, na versão do pacote, vai mostrar essa data sozinha.</div></div>
+      <div class="callout"><span class="ico">💡</span><div>Para saber quando o seu token vence, cole-o na Ferramenta de depuração e leia a linha <strong>Expira</strong>. O setup da skill Meta mostra essa data e avisa quando faltam poucos dias.</div></div>
 
-      <div class="callout warn"><span class="ico">⚠️</span><div>Em 27/09/2026 a skill <code>/conectar-meta</code> ainda lê o arquivo de credencial antigo, no caminho da conta do Lucas: não use para validar. A versão que lê <code>~/OdontoRise/credentials/</code> e mostra a validade do token entra com o pacote de skills; até lá, os testes são os comandos acima.</div></div>
-      <div class="callout danger"><span class="ico">🔒</span><div>O token é seu. Não cole em nota, print, WhatsApp, Drive ou no chat do Claude. Se vazar: no Explorador, menu <strong>Usuário ou Página → Desinstalar app</strong>, que destrói o token na hora; depois, em <strong>Configurações do app → Básico</strong>, redefina a chave secreta, e gere um token novo pela parte 3.</div></div>
+            <div class="callout danger"><span class="ico">🔒</span><div>O token é seu. Não cole em nota, print, WhatsApp, Drive ou no chat do Claude. Se vazar: no Explorador, menu <strong>Usuário ou Página → Desinstalar app</strong>, que destrói o token na hora; depois, em <strong>Configurações do app → Básico</strong>, redefina a chave secreta, e gere um token novo pela parte 3.</div></div>
     </div>
   </section>
 
@@ -362,7 +360,7 @@ Invoke-RestMethod $u</pre></div>
         <li><strong>O administrador faz:</strong> dá ao seu e-mail acesso às contas dos seus clientes na conta gerenciadora do Google Ads e entrega o token de desenvolvedor por canal seguro.</li>
         <li><strong>Você faz</strong> (quando o item 1 estiver pronto): instala o servidor, faz login com a sua conta Google e guarda a credencial em <code>~/OdontoRise/credentials/google-ads-odontorise.env</code>, com permissão só sua.</li>
       </ol>
-      <div class="callout warn"><span class="ico">⚠️</span><div>Em 28/09/2026 os acessos da conta gerenciadora ainda estão sendo ajustados. Até o administrador liberar, marque este passo como concluído e siga: o Meta não depende dele. O passo a passo detalhado entra neste guia quando o acesso estiver pronto.</div></div>
+      <div class="callout warn"><span class="ico">⚠️</span><div>Enquanto o administrador não liberar o seu acesso na conta gerenciadora, marque este passo como concluído e siga: o Meta não depende dele. O passo a passo detalhado será acrescentado a este guia quando o acesso estiver liberado.</div></div>
     </div>
   </section>
 
@@ -377,7 +375,7 @@ Invoke-RestMethod $u</pre></div>
 
       <h3>Antes: o administrador libera (uma vez, para a agência toda)</h3>
       <p>Cada conector precisa ser liberado pelo administrador da organização antes de aparecer para você. Ele faz isso nas configurações de administrador do claude.ai, na seção de conectores, procurando o conector e adicionando à equipe.</p>
-      <div class="callout warn"><span class="ico">⚠️</span><div>Se ao procurar um conector você vir a opção de <strong>solicitar</strong> em vez de <strong>conectar</strong>, é porque ele ainda não foi liberado. Clique em solicitar: o administrador recebe o pedido. Em 21/09/2026, o Meta e o Gmail ainda não estavam liberados na organização da OdontoRise.</div></div>
+      <div class="callout warn"><span class="ico">⚠️</span><div>Se ao procurar um conector você vir a opção de <strong>solicitar</strong> em vez de <strong>conectar</strong>, é porque ele ainda não foi liberado. Clique em solicitar: o administrador recebe o pedido.</div></div>
 
       <h3>O caminho, igual para todos</h3>
       <ol>
@@ -420,7 +418,7 @@ Invoke-RestMethod $u</pre></div>
         </tr>
       </table></div>
 
-      <div class="callout warn"><span class="ico">⚠️</span><div><strong>ClickUp, detalhe que importa:</strong> o workspace da OdontoRise é o <code>90171289892</code>. Toda vez que o Claude perguntar de qual workspace se trata, é esse. Em 21/09/2026 o conector respondia "not authorized" para alguns comandos, porque o aplicativo precisa ser reaprovado pelo administrador do ClickUp. Enquanto isso não acontece, as skills usam um token pessoal: no ClickUp, abra seu perfil, vá em configurações, aplicativos, e gere o token de API. Salve em <code>~/OdontoRise/credentials/clickup-odontorise.env</code> na linha <code>CLICKUP_TOKEN=</code>. O token fica visível para copiar depois; <strong>nunca clique em gerar de novo</strong>, isso invalida o anterior e derruba o que dependia dele.</div></div>
+      <div class="callout warn"><span class="ico">⚠️</span><div><strong>ClickUp, detalhe que importa:</strong> o workspace da OdontoRise é o <code>90171289892</code>. Toda vez que o Claude perguntar de qual workspace se trata, é esse. Se o conector responder "not authorized", o aplicativo do conector ainda não foi aprovado no workspace pelo administrador; as skills não dependem dele, porque leem o ClickUp pelo seu token pessoal. <code>~/OdontoRise/credentials/clickup-odontorise.env</code> na linha <code>CLICKUP_TOKEN=</code>. O token fica visível para copiar depois; <strong>nunca clique em gerar de novo</strong>, isso invalida o anterior e derruba o que dependia dele.</div></div>
 
       <h3>Se algo der errado</h3>
       <div class="tbl"><table>
@@ -509,10 +507,10 @@ Invoke-RestMethod $u</pre></div>
     <label><input type="checkbox" data-check="c6"> O setup da skill Meta terminou em TUDO PRONTO e um cliente meu foi cadastrado a partir do ClickUp</label>
   </div>
 
-  <div class="next"><h3>Próximo passo</h3>Vá para a página do seu papel. Gestores, Head e CS estão em construção neste guia; até ficarem prontas, as regras acima e o <code>CLAUDE.md</code> do workspace já valem.</div>
+  <div class="next"><h3>Próximo passo</h3>Vá para a página do seu papel: Gestores, Head ou CS. Lá estão as skills que você vai usar no dia a dia.</div>
 </main>
 
-<footer class="footer">Guia interno OdontoRise, mantido por Lucas Teles. Versão 0.2 de 28/09/2026. Sem tracking, sem dependência externa.</footer>
+<footer class="footer">Guia de IA OdontoRise. Material interno da agência.</footer>
 <button class="btt" type="button" aria-label="Voltar ao topo">↑</button>
 <script src="../assets/js/guia.js"></script>
 </body>
