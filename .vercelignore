@@ -1,0 +1,11 @@
+README.md
+docs-fonte
+.git
+.gitignore
+.vercelignore
+.env
+.env.*
+*.env
+credentials
+.DS_Store
+*.log

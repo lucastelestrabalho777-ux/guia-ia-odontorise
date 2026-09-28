@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex, nofollow">
+<title>Onboarding · Guia de IA OdontoRise</title>
+<meta name="description" content="Setup do ambiente de IA da OdontoRise: VS Code, Claude Code, skills, Meta e Google dentro do Claude, memória e teste com dado real.">
+<link rel="stylesheet" href="../assets/css/guia.css">
+</head>
+<body data-page="onboarding">
+<nav class="nav">
+  <a class="brand" href="../">ODONTO<span>RISE</span> · IA</a>
+  <a class="item" href="../">Início</a>
+  <a class="item active" href="../onboarding/">Onboarding</a>
+  <a class="item" href="../gestores/">Gestores</a>
+  <a class="item" href="../head/">Head</a>
+  <a class="item" href="../cs/">CS</a>
+  <button class="theme" type="button" aria-label="Alternar tema claro e escuro">Tema</button>
+</nav>
+<div class="progress" aria-live="polite">
+  <span>Progresso</span>
+  <div class="track"><div class="fill"></div></div>
+  <span class="pct">0%</span>
+  <a class="continue" href="#" hidden></a>
+  <span class="note"></span>
+  <button class="reset" type="button">zerar</button>
+</div>
+
+<header class="hero">
+  <div class="inner">
+    <div class="badge">10 PASSOS · MAC E WINDOWS</div>
+    <h1>Setup do ambiente</h1>
+    <p class="sub">Instale o VS Code, entre no Claude Code com o assento da OdontoRise, receba as skills e conecte o Meta. No fim, um teste com dado real prova que tudo funciona.</p>
+    <div class="metrics">
+      <div><strong>~40 min</strong>tempo estimado</div>
+      <div><strong>10 passos</strong>com checkpoint</div>
+      <div><strong>v21.0</strong>Meta Graph API, válida até 21/01/2027</div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <p class="intro">Clique no número de cada passo para marcar como concluído. O progresso e o checklist final ficam salvos neste navegador. Os comandos aparecem na aba do seu sistema; troque de aba se precisar.</p>
+
+  <div class="callout warn"><span class="ico">⚠️</span><div><strong>Antes de começar:</strong> você precisa de um assento ativo no Claude Team da OdontoRise (convite no seu e-mail @odontorise.com). Sem o assento, o login do passo 2 não funciona. Em 21/09/2026 existe 1 assento; os próximos são liberados pelo administrador da organização.</div></div>
+
+  <!-- 1 -->
+  <section class="step" id="p1" data-step="p1">
+    <div class="step-head">
+      <button class="step-check" type="button" role="checkbox" aria-checked="false" aria-label="Marcar passo 1 como concluído"><span class="num">1</span></button>
+      <div><h2>Instalar o VS Code</h2><p class="desc">O programa onde o Claude trabalha. Gratuito, da Microsoft.</p></div>
+    </div>
+    <div class="card">
+      <div class="callout"><span class="ico">💡</span><div><strong>Para que serve:</strong> o VS Code é um editor de arquivos. Você não vai programar nele. Ele é a casa do Claude: é dentro dele que o painel de conversa abre com acesso às suas pastas, aos seus arquivos de cliente e aos scripts. <strong>Sem ele</strong>, o Claude fica só no navegador, sem enxergar nada da sua máquina e sem rodar nada.</div></div>
+      <div class="os-tabs" role="radiogroup" aria-label="Sistema operacional"><button type="button" data-os="mac" role="radio" aria-checked="false">macOS</button><button type="button" data-os="win" role="radio" aria-checked="false">Windows</button></div>
+      <div class="os-panel" data-os="mac">
+        <ol>
+          <li>Baixe em <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">code.visualstudio.com/download</a> (versão para Apple Silicon ou Intel, conforme o seu Mac).</li>
+          <li>Abra o <code>.zip</code> baixado e arraste o <strong>Visual Studio Code</strong> para a pasta <strong>Aplicativos</strong>.</li>
+          <li>Abra o VS Code. Se o macOS perguntar se quer abrir um app baixado da internet, clique em <strong>Abrir</strong>.</li>
+          <li>Pressione <code>Cmd+Shift+P</code>, digite <code>Shell Command: Install 'code' command in PATH</code> e confirme. Isso permite abrir pastas com <code>code ~/OdontoRise</code> no terminal.</li>
+        </ol>
+      </div>
+      <div class="os-panel" data-os="win">
+        <ol>
+          <li>Baixe em <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">code.visualstudio.com/download</a> (User Installer, 64 bits) e instale com as opções padrão. Marque <strong>Adicionar ao PATH</strong> (PATH é a lista de pastas onde o sistema procura programas).</li>
+          <li>Ou, no PowerShell:</li>
+        </ol>
+        <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>winget install Microsoft.VisualStudioCode</pre></div>
+      </div>
+      <div class="callout"><span class="ico">💡</span><div>Atalhos que este guia usa: <code>Cmd+Shift+P</code> (Mac) ou <code>Ctrl+Shift+P</code> (Windows) abre a paleta de comandos; <code>Cmd+Shift+X</code> ou <code>Ctrl+Shift+X</code> abre as extensões; <code>Ctrl+`</code> (crase) abre o terminal integrado nos dois sistemas.</div></div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="step" id="p2" data-step="p2">
+    <div class="step-head">
+      <button class="step-check" type="button" role="checkbox" aria-checked="false" aria-label="Marcar passo 2 como concluído"><span class="num">2</span></button>
+      <div><h2>Instalar a extensão Claude Code e entrar no assento da OdontoRise</h2><p class="desc">A extensão é o Claude dentro do VS Code. É por ela que tudo acontece.</p></div>
+    </div>
+    <div class="card">
+      <div class="callout"><span class="ico">💡</span><div><strong>Para que serve:</strong> a extensão põe o Claude dentro do editor, com permissão para ler e escrever nos seus arquivos, rodar os scripts e usar as skills. É diferente do Claude do navegador, que só conversa. <strong>Sem ela</strong>, nada deste guia funciona.</div></div>
+      <h3>Instalar</h3>
+      <ol>
+        <li>No VS Code, abra as extensões (<code>Cmd+Shift+X</code> no Mac, <code>Ctrl+Shift+X</code> no Windows).</li>
+        <li>Pesquise <strong>Claude Code</strong> e instale a extensão publicada pela <strong>Anthropic</strong>.</li>
+        <li>Abra a paleta (<code>Cmd+Shift+P</code> ou <code>Ctrl+Shift+P</code>), digite <strong>Claude Code</strong> e escolha o comando que abre o painel. O painel aparece na lateral.</li>
+      </ol>
+      <h3>Entrar</h3>
+      <ol>
+        <li>No painel, clique em <strong>Sign in</strong>. O navegador abre.</li>
+        <li>Entre com o seu e-mail <strong>@odontorise.com</strong>. Se aparecer mais de uma organização, escolha <strong>Odontorise</strong>.</li>
+        <li>Autorize e volte ao VS Code. O painel passa a mostrar o chat.</li>
+      </ol>
+      <div class="callout danger"><span class="ico">🚫</span><div>Nunca entre com a conta pessoal de outra pessoa nem com a conta do Lucas. O assento é seu: os conectores, as permissões e a memória seguem o login.</div></div>
+      <h3>Opcional: o comando <code>claude</code> no terminal</h3>
+      <p>Faz a mesma coisa que o painel, dentro do terminal. Instruções oficiais em <a href="https://code.claude.com/docs/en/setup" target="_blank" rel="noopener">code.claude.com/docs/en/setup</a>. Se instalar, rode <code>claude</code> dentro de <code>~/OdontoRise</code> e faça <code>/login</code> com o mesmo e-mail.</p>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="step" id="p3" data-step="p3">
+    <div class="step-head">
+      <button class="step-check" type="button" role="checkbox" aria-checked="false" aria-label="Marcar passo 3 como concluído"><span class="num">3</span></button>
+      <div><h2>Base do sistema: as ferramentas que as skills usam</h2><p class="desc">O Claude conversa sozinho, mas para buscar dado no Meta ele roda programas. São esses programas.</p></div>
+    </div>
+    <div class="card">
+      <h3>O que você vai instalar, e por quê</h3>
+      <div class="tbl"><table>
+        <tr><th>Item</th><th>O que é</th><th>Para que a OdontoRise usa</th><th>Se faltar</th></tr>
+        <tr><td><strong>Ferramentas de linha de comando</strong><br><span style="font-size:11px">Apple no Mac, winget no Windows</span></td><td>O kit básico que o sistema precisa para instalar e rodar programas pelo terminal. No Mac, já traz o Git junto.</td><td>É a base de tudo o que vem abaixo.</td><td>Nenhum dos outros instala.</td></tr>
+        <tr><td><strong>Homebrew</strong><br><span style="font-size:11px">só no Mac</span></td><td>Uma loja de programas para o terminal. Você pede pelo nome e ele instala.</td><td>Instalar o Python e o ffmpeg em um comando, sem caçar site de download.</td><td>Você instala cada programa na mão, baixando de sites diferentes.</td></tr>
+        <tr><td><strong>Git</strong></td><td>Guarda o histórico de versões de arquivos e sincroniza pastas entre computadores.</td><td>Receber o pacote de skills e as atualizações dele sem baixar arquivo compactado.</td><td>Toda atualização de skill vira envio manual de arquivo.</td></tr>
+        <tr><td><strong>Python</strong></td><td>Uma linguagem de programação. É nela que as skills de dados são escritas.</td><td>É o Python que conversa com o Meta, calcula custo por lead e monta relatório.</td><td>O Claude responde, mas não busca número nenhum.</td></tr>
+        <tr><td><strong>ffmpeg</strong></td><td>Ferramenta que corta e converte áudio e vídeo.</td><td>Tirar o áudio de um criativo para a skill transcrever a fala e escrever a legenda.</td><td>Só a skill de legenda de vídeo para. O resto funciona.</td></tr>
+        <tr><td><strong>requests</strong><br><span style="font-size:11px">peça do Python</span></td><td>O pedaço do Python que faz pedidos pela internet.</td><td>Cada consulta à API do Meta passa por ela.</td><td>Toda skill de dados dá erro na primeira linha.</td></tr>
+        <tr><td><strong>python-dotenv</strong><br><span style="font-size:11px">peça do Python</span></td><td>Lê arquivos de credencial.</td><td>Carregar o seu token do arquivo, para ele nunca aparecer digitado num comando.</td><td>Os scripts não acham o seu token.</td></tr>
+        <tr><td><strong>facebook-business</strong><br><span style="font-size:11px">peça do Python</span></td><td>A biblioteca oficial da Meta para falar com o Gerenciador de Anúncios.</td><td>É por ela que a skill Meta lê campanhas, métricas e sobe criativos.</td><td>A skill Meta não roda.</td></tr>
+      </table></div>
+      <div class="os-tabs" role="radiogroup" aria-label="Sistema operacional"><button type="button" data-os="mac" role="radio" aria-checked="false">macOS</button><button type="button" data-os="win" role="radio" aria-checked="false">Windows</button></div>
+      <div class="os-panel" data-os="mac">
+        <p>Abra o app <strong>Terminal</strong> (ou o terminal do VS Code com <code>Ctrl+`</code>) e rode, um de cada vez:</p>
+        <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre><span class="c"># 1) ferramentas de linha de comando da Apple (traz o git). Aceite a janela que aparece.</span>
+xcode-select --install</pre></div>
+        <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre><span class="c"># 2) Homebrew, o instalador de programas do Mac (pede a senha do computador)</span>
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre></div>
+        <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre><span class="c"># 3) Python 3 e ffmpeg (ffmpeg só é usado pela skill /legenda-video)</span>
+brew install python ffmpeg</pre></div>
+        <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre><span class="c"># 4) as três peças de Python que os scripts usam</span>
+python3 -m pip install --user requests python-dotenv facebook-business==26.0.2</pre></div>
+        <div class="callout warn"><span class="ico">⚠️</span><div>Se o comando 4 acima devolver <code>externally-managed-environment</code>, repita o comando acrescentando <code>--break-system-packages</code> no final. Se o Homebrew pedir para adicionar uma linha ao <code>~/.zprofile</code>, faça o que ele indica e feche e reabra o terminal. No Mac não precisa reiniciar o computador.</div></div>
+        <div class="callout"><span class="ico">💡</span><div>No Mac o comando é <code>python3</code>, não <code>python</code>. Conferir: <code>python3 --version</code> deve mostrar 3.11 ou mais novo, e <code>git --version</code> deve responder.</div></div>
+      </div>
+      <div class="os-panel" data-os="win">
+        <p>Abra o <strong>PowerShell</strong> e rode, um de cada vez:</p>
+        <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>winget install Git.Git
+winget install Python.Python.3.12
+winget install Gyan.FFmpeg</pre></div>
+        <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>python -m pip install --user requests python-dotenv facebook-business==26.0.2</pre></div>
+        <div class="callout warn"><span class="ico">⚠️</span><div>No Windows, feche e reabra o PowerShell depois de instalar (a lista de programas que o sistema conhece só atualiza em janela nova). Se <code>python</code> não for reconhecido, reinicie o computador e tente de novo. Em 21/09/2026 a skill <code>/legenda-video</code> roda só em Mac com chip Apple (transcrição local); no Windows ela fica fora por enquanto.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="step" id="p4" data-step="p4">
+    <div class="step-head">
+      <button class="step-check" type="button" role="checkbox" aria-checked="false" aria-label="Marcar passo 4 como concluído"><span class="num">4</span></button>
+      <div><h2>Criar a pasta OdontoRise</h2><p class="desc">Uma pasta chamada <code>OdontoRise</code> na sua pasta pessoal. É ela que você abre no VS Code, e é onde ficam as regras da casa e as suas credenciais.</p></div>
+    </div>
+    <div class="card">
+      <div class="code"><div class="code-head"><span>estrutura</span></div><pre>~/OdontoRise/
+├── CLAUDE.md        <span class="c">regras da casa que o Claude lê em toda sessão (vem no zip)</span>
+├── credentials/     <span class="c">SÓ os seus arquivos de credencial (passos 6 e 8). Nunca compartilhada, nunca enviada.</span>
+└── meta-ads/        <span class="c">cadastro de clientes e aprendizados; a skill cria sozinha</span></pre></div>
+      <h3>Como criar</h3>
+      <ol>
+        <li>O Lucas envia a pasta <code>OdontoRise</code> em zip, com o <code>CLAUDE.md</code> dentro e <strong>sem</strong> credenciais. Descompacte na sua pasta pessoal, de modo que o caminho fique <code>~/OdontoRise</code> (Mac) ou <code>C:\Users\seu-nome\OdontoRise</code> (Windows), sem pasta duplicada dentro.</li>
+        <li>Abra a pasta no VS Code: <strong>Arquivo → Abrir Pasta</strong> → <code>OdontoRise</code>. Ou, no terminal, <code>code ~/OdontoRise</code>.</li>
+        <li>Abra o painel do Claude Code. Como a pasta tem um <code>CLAUDE.md</code>, o Claude já começa com as regras da casa carregadas.</li>
+      </ol>
+      <div class="callout danger"><span class="ico">🔒</span><div>Se alguém enviar a pasta <code>credentials/</code> junto, apague e avise. Essa pasta é criada por você, no passo 6, só com as suas credenciais.</div></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="step" id="p5" data-step="p5">
+    <div class="step-head">
+      <button class="step-check" type="button" role="checkbox" aria-checked="false" aria-label="Marcar passo 5 como concluído"><span class="num">5</span></button>
+      <div><h2>Ativar as skills</h2><p class="desc">As skills chegam pela sua conta do claude.ai: o Lucas compartilha, você ativa uma vez, e o Claude Code baixa e atualiza sozinho.</p></div>
+    </div>
+    <div class="card">
+      <p>Skill é um pacote de instruções e scripts que faz o Claude executar uma rotina inteira: puxar dados, cruzar, entregar pronto. A lista do que cada papel recebe está nas páginas <a href="../gestores/">Gestores</a>, <a href="../head/">Head</a> e <a href="../cs/">CS</a>.</p>
+      <ol>
+        <li>No navegador, entre em <strong>claude.ai</strong> com o e-mail @odontorise.com → <strong>Personalizar → Skills</strong>.</li>
+        <li>Na seção <strong>Compartilhadas com você</strong>, ative cada skill da OdontoRise (elas chegam desligadas). Se a seção estiver vazia, o Lucas ainda não compartilhou com o seu e-mail: avise.</li>
+        <li>No VS Code, com a pasta <code>OdontoRise</code> aberta, digite <code>/skills</code> no chat do Claude. As skills da OdontoRise aparecem no grupo <strong>claude.ai sync</strong>. Se não aparecerem, feche e reabra o painel: o Claude Code baixa as skills ao iniciar e confere novidades a cada 10 minutos.</li>
+      </ol>
+      <h3>Como funciona por dentro</h3>
+      <div class="tbl"><table>
+        <tr><th>Tipo</th><th>Onde vive</th><th>Como usa</th></tr>
+        <tr><td>Skill compartilhada</td><td>baixada pelo Claude Code em <code>~/.claude/skills/synced/</code></td><td>digite <code>/nome</code> ou peça em linguagem natural; o Claude aciona sozinho quando o pedido bate com a descrição</td></tr>
+        <tr><td>Conector (MCP)</td><td>claude.ai → Configurações → Conectores</td><td>o "aplicativo" dentro do Claude: ClickUp, Drive, Calendar, Meta. Segue o seu login, não a pasta</td></tr>
+        <tr><td>Suas credenciais</td><td><code>~/OdontoRise/credentials/</code></td><td>as skills leem daí; nunca ficam dentro da skill</td></tr>
+      </table></div>
+      <div class="callout"><span class="ico">💡</span><div>Atualização é automática: quando o Lucas publica uma versão nova, o seu Claude Code troca sozinho. Por isso não edite nada dentro de <code>~/.claude/skills/synced/</code>: a próxima sincronização sobrescreve.</div></div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="step" id="p6" data-step="p6">
+    <div class="step-head">
+      <button class="step-check" type="button" role="checkbox" aria-checked="false" aria-label="Marcar passo 6 como concluído"><span class="num">6</span></button>
+      <div><h2>Meta dentro do Claude: seu aplicativo e seu token</h2><p class="desc">Você entra na Business Manager com a sua conta do Facebook e recebe acesso só aos seus clientes. Depois cria um aplicativo seu no painel de desenvolvedor do Meta e gera o próprio token. Renovar é com você, em 5 minutos, sem depender de ninguém.</p></div>
+    </div>
+    <div class="card">
+      <div class="tbl"><table>
+        <tr><th></th><th>Conector Meta (MCP)</th><th>Credencial em arquivo (token seu)</th></tr>
+        <tr><td>Como entra</td><td>claude.ai → Configurações → Conectores → Meta, com o seu login do Facebook</td><td>arquivo <code>~/OdontoRise/credentials/meta-odontorise.env</code> com o ID e a chave secreta do seu aplicativo e o token que você mesmo gera</td></tr>
+        <tr><td>Serve para</td><td>consultar métricas, públicos, pixel, Biblioteca de Anúncios; ações rápidas</td><td>tudo que as skills fazem: rankings, relatórios, subir criativos, histórico de alterações da conta</td></tr>
+        <tr><td>Não faz</td><td>upload de mídia; não enxerga várias contas de clientes que estão em BM própria</td><td>não substitui o conector para perguntas soltas no chat</td></tr>
+        <tr><td>Pré-requisito</td><td>sua conta do Facebook na BM da OdontoRise com acesso às contas dos seus clientes</td><td>o mesmo acesso, mais um aplicativo seu no painel de desenvolvedor (gratuito, uns 10 minutos, feito uma vez)</td></tr>
+        <tr><td>Validade</td><td>enquanto você tiver acesso</td><td>60 dias. Você mesmo renova, repetindo a parte 3 deste passo</td></tr>
+      </table></div>
+
+      <h3>A. Conector Meta (você faz)</h3>
+      <ol>
+        <li>Peça ao admin da BM <strong>666777657534959</strong> para adicionar o seu usuário do Facebook como <strong>Funcionário</strong> e atribuir as contas de anúncio dos seus clientes.</li>
+        <li>No navegador, entre em <strong>claude.ai</strong> com o e-mail @odontorise.com → <strong>Configurações → Conectores</strong> → conecte o <strong>Meta</strong> (aparece como Meta MCP ou Meta Ads) → faça login no Facebook e autorize.</li>
+        <li>No VS Code, feche e reabra o painel do Claude. Teste no chat: <em>"liste as contas de anúncio que você enxerga no Meta"</em>.</li>
+      </ol>
+
+      <div class="callout warn"><span class="ico">⚠️</span><div>Em 21/09/2026 o conector Meta ainda não está habilitado na organização Claude Team da OdontoRise (depende do administrador da org). Até liberar, use só a credencial em arquivo (parte B).</div></div>
+
+      <h3>B. Seu aplicativo e seu token</h3>
+      <p>Cada pessoa tem o <strong>próprio aplicativo</strong> e o <strong>próprio token</strong>. É isso que faz o histórico da conta registrar quem alterou o quê, e é o que deixa você independente: o aplicativo é seu, a chave secreta é sua, a renovação é sua. Nunca use o token de outra pessoa.</p>
+
+      <div class="callout"><span class="ico">💡</span><div>Dois gestores trabalhando ao mesmo tempo não atrapalham um ao outro. O Meta conta o uso por conta de anúncio, não por aplicativo, e sobra folga: medimos 1.220 chamadas por hora disponíveis numa conta de cliente, contra menos de 1% em uso hoje.</div></div>
+
+      <div class="callout"><span class="ico">💡</span><div><strong>Por que um aplicativo por pessoa, e não o da agência?</strong> O aplicativo da OdontoRise, no nível de acesso que tem hoje, comporta um único usuário de sistema, e ele já está em uso. Quando ele subir de nível (Advanced Access), cada pessoa recebe um usuário de sistema e o token deixa de vencer. Nesse dia muda só o conteúdo do seu arquivo de credencial; o resto deste guia continua igual.</div></div>
+
+      <p><strong>Parte 1, o administrador da BM faz</strong> (uma vez, antes de você começar):</p>
+      <ol>
+        <li>Adiciona você à Business Manager <strong>666777657534959</strong> com o papel de <strong>Funcionário</strong>, usando a sua conta pessoal do Facebook. Você recebe o convite por e-mail e aceita.</li>
+        <li>Atribui a você <strong>só as contas dos seus clientes</strong>, no nível do seu papel (gestor: anunciante; head: administrador; CS: analista).</li>
+      </ol>
+
+      <div class="callout warn"><span class="ico">⚠️</span><div>A Business Manager exige autenticação de dois fatores de todo mundo. Ative na sua conta do Facebook antes de aceitar o convite, senão ele não conclui.</div></div>
+
+      <p><strong>Parte 2, você cria o seu aplicativo</strong> (uma vez, uns 10 minutos):</p>
+      <ol>
+        <li><strong>Vire desenvolvedor.</strong> Entre em <a href="https://developers.facebook.com/" target="_blank" rel="noopener">developers.facebook.com</a> com a mesma conta do Facebook que está na BM, clique em <strong>Como começar</strong>, aceite os termos, digite os códigos que chegam por telefone e por e-mail e escolha uma profissão. Sem isso o painel de apps não abre.</li>
+        <li><strong>Crie o app.</strong> Em <a href="https://developers.facebook.com/apps/creation/" target="_blank" rel="noopener">Criar app</a>, dê o nome <code>OdontoRise - Seu Nome</code>, informe o seu e-mail @odontorise.com como contato e clique em <strong>Avançar</strong>.</li>
+        <li><strong>Caso de uso.</strong> Marque <strong>Criar e gerenciar anúncios com a API de Marketing</strong>. Se aparecer disponível, marque também <strong>Gerenciar mensagens e conteúdo no Instagram</strong>, que traz as permissões do Instagram. Avançar.</li>
+        <li><strong>Empresa.</strong> Escolha <strong>Ainda não quero me conectar a um portfólio empresarial</strong>. O acesso às contas dos clientes vem do seu papel na BM, não do aplicativo. Avance até <strong>Ir para o painel</strong>.</li>
+        <li><strong>Anote as duas chaves.</strong> No painel do app, abra <strong>Configurações do app → Básico</strong>. Copie o <strong>ID do app</strong> e, em <strong>Chave secreta do app</strong>, clique em <strong>Mostrar</strong> (pede a sua senha do Facebook). Os dois vão para o arquivo da parte 4, e para lugar nenhum além dele.</li>
+        <li><strong>Publique o app (modo Ativo).</strong> Ainda em <strong>Configurações do app → Básico</strong>, preencha o que o Meta exige para publicar:
+          <ul>
+            <li><strong>URL da Política de Privacidade</strong>: gere a sua, gratuita, em <a href="https://www.termsfeed.com/" target="_blank" rel="noopener">termsfeed.com</a> (Privacy Policy Generator) e cole o link que o site entrega. A página de privacidade do site oficial da OdontoRise também serve. <strong>Nunca use link de Instagram</strong>: o Meta bloqueia o aplicativo. Precisa ser um site de verdade.</li>
+            <li><strong>Ícone do app</strong>: uma imagem quadrada de 1024 px (o logo da OdontoRise resolve).</li>
+            <li><strong>Categoria</strong>: por exemplo, Negócios e páginas.</li>
+            <li><strong>Exigir chave secreta do aplicativo</strong>: em <strong>Configurações do app → Avançado</strong>, ligue essa opção. Com ela, um token que vazar não serve para ninguém sem a sua chave secreta; as skills já enviam a prova que o Meta pede.</li>
+          </ul>
+          Salve e mude o interruptor no topo do painel de <strong>Desenvolvimento</strong> para <strong>Ativo</strong>. Em Desenvolvimento a leitura funciona, mas subir anúncio falha com o erro 1885183. Não precisa de Análise do app nem de verificação da empresa: só você usa esse aplicativo.</li>
+      </ol>
+
+      <p><strong>Parte 3, você gera o seu token</strong> (5 minutos; é o que se repete a cada 60 dias):</p>
+      <ol>
+        <li>Abra o <a href="https://developers.facebook.com/tools/explorer/" target="_blank" rel="noopener">Explorador da Graph API</a>.</li>
+        <li>No menu <strong>App da Meta</strong>, no canto superior direito, escolha <strong>o seu aplicativo</strong>. Ele só aparece se você estiver no Facebook com a conta que o criou.</li>
+        <li>No menu <strong>Usuário ou Página</strong>, escolha <strong>Token de usuário</strong>.</li>
+        <li>No menu <strong>Permissões</strong>, adicione as nove da tabela abaixo.</li>
+        <li>Clique em <strong>Gerar token de acesso</strong>. Na janela do Facebook, autorize. Se ele perguntar quais Páginas e contas do Instagram, selecione as dos seus clientes.</li>
+        <li>Copie o token que apareceu no campo <strong>Token de acesso</strong>. Ele dura só 1 a 2 horas: siga direto para o item 7.</li>
+        <li><strong>Estenda para 60 dias.</strong> Abra a <a href="https://developers.facebook.com/tools/debug/accesstoken/" target="_blank" rel="noopener">Ferramenta de depuração de token</a>, cole o token, clique em <strong>Depurar</strong> e, no fim da página, em <strong>Estender token de acesso</strong>. Copie o token novo: a linha <strong>Expira</strong> deve mostrar uma data cerca de 60 dias à frente. É esse que você guarda. Se o botão não aparecer, use o comando de troca no fim da parte 4.</li>
+      </ol>
+
+      <h4 style="font-size:14px;margin:16px 0 6px">As nove permissões, e o que cada uma libera</h4>
+      <div class="tbl"><table>
+        <tr><th>Permissão</th><th>O que ela deixa você fazer</th></tr>
+        <tr><td><code>ads_management</code></td><td>Criar e editar campanhas, conjuntos e anúncios. É a permissão de trabalho do gestor.</td></tr>
+        <tr><td><code>ads_read</code></td><td>Ler gasto, leads, custo por conversa e todo o resto do relatório.</td></tr>
+        <tr><td><code>business_management</code></td><td>Enxergar a estrutura da Business Manager: quais contas existem e a quais você tem acesso.</td></tr>
+        <tr><td><code>pages_show_list</code></td><td>Listar as páginas do Facebook dos seus clientes, para saber de qual página o anúncio sai.</td></tr>
+        <tr><td><code>pages_read_engagement</code></td><td>Ler alcance, curtidas e comentários dos posts da página.</td></tr>
+        <tr><td><code>pages_manage_ads</code></td><td>Transformar um post da página em anúncio.</td></tr>
+        <tr><td><code>pages_read_user_content</code></td><td>Ler o conteúdo dos posts e os comentários das pessoas.</td></tr>
+        <tr><td><code>instagram_basic</code></td><td>Ver o perfil e os posts do Instagram do cliente. É o que permite impulsionar post orgânico.</td></tr>
+        <tr><td><code>instagram_manage_insights</code></td><td>Ver as métricas dos Reels e posts: alcance, salvamentos, tempo de visualização.</td></tr>
+      </table></div>
+      <div class="callout"><span class="ico">💡</span><div>Marcar só essas nove é proposital. Cada permissão a mais é uma porta a mais aberta na conta do cliente. Se uma skill reclamar de permissão faltando, avise o administrador em vez de marcar tudo.</div></div>
+
+      <div class="callout danger"><span class="ico">🔒</span><div>O token nunca vai por WhatsApp, e-mail, Drive, print ou chat do Claude. Um token que entra no WhatsApp já está no backup do celular de quem recebeu. A chave secreta do seu aplicativo é sua: fica só no arquivo da parte 4 e nunca é digitada em chat nenhum, nem no do Claude.</div></div>
+
+      <p><strong>Parte 4, guardar na sua máquina:</strong></p>
+      <div class="os-tabs" role="radiogroup" aria-label="Sistema operacional"><button type="button" data-os="mac" role="radio" aria-checked="false">macOS</button><button type="button" data-os="win" role="radio" aria-checked="false">Windows</button></div>
+      <div class="os-panel" data-os="mac">
+        <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre><span class="c"># cria a pasta de credenciais e o arquivo (os valores são colados no editor que abre)</span>
+mkdir -p ~/OdontoRise/credentials
+nano ~/OdontoRise/credentials/meta-odontorise.env</pre></div>
+      </div>
+      <div class="os-panel" data-os="win">
+        <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre><span class="c"># cria a pasta de credenciais e abre o arquivo no Bloco de Notas</span>
+mkdir $HOME\OdontoRise\credentials -Force
+notepad $HOME\OdontoRise\credentials\meta-odontorise.env</pre></div>
+      </div>
+      <p>Conteúdo do arquivo (troque as três primeiras linhas pelos seus valores; as duas últimas ficam vazias de propósito, porque conta e Instagram variam por cliente):</p>
+      <div class="code"><div class="code-head"><span>meta-odontorise.env</span><button class="copy-btn" type="button">Copiar</button></div><pre>META_ACCESS_TOKEN=COLE_AQUI_O_SEU_TOKEN_DE_60_DIAS
+META_APP_ID=COLE_AQUI_O_ID_DO_SEU_APP
+META_APP_SECRET=COLE_AQUI_A_CHAVE_SECRETA_DO_SEU_APP
+META_BM_ID=666777657534959
+META_AD_ACCOUNT_ID=
+META_IG_USER_ID=</pre></div>
+      <div class="os-panel" data-os="mac">
+        <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre><span class="c"># só o seu usuário lê o arquivo</span>
+chmod 600 ~/OdontoRise/credentials/meta-odontorise.env</pre></div>
+        <p>Teste 1, o token é seu (deve responder com o seu nome e um identificador):</p>
+        <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre>set -a; source ~/OdontoRise/credentials/meta-odontorise.env; set +a
+curl -s -G "https://graph.facebook.com/v21.0/me" \
+  --data-urlencode "access_token=$META_ACCESS_TOKEN"</pre></div>
+        <p>Teste 2, você enxerga os seus clientes (deve listar as contas de anúncio que o administrador atribuiu a você; se vier <code>"data":[]</code>, a parte 1 não foi feita):</p>
+        <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre>curl -s -G "https://graph.facebook.com/v21.0/me/adaccounts" \
+  --data-urlencode "fields=name,account_id" \
+  --data-urlencode "access_token=$META_ACCESS_TOKEN"</pre></div>
+        <p><strong>Teste 3, a conferência completa</strong> (quando a skill Meta já estiver na sua máquina, passo 5): no chat do Claude, peça <em>"rode o setup da skill Meta"</em>. Ele confere programas, arquivo de credencial, validade do token, as nove permissões e as contas que você enxerga, e lista o que falta com a parte do guia para resolver. Repita sempre que algo parar de funcionar.</p>
+        <p>Só se o botão <strong>Estender token de acesso</strong> não apareceu na parte 3: salve o token curto na primeira linha do arquivo, rode o comando abaixo e troque a primeira linha pelo valor de <code>access_token</code> da resposta (<code>expires_in</code> vem em segundos: 5183944 são 60 dias).</p>
+        <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre>set -a; source ~/OdontoRise/credentials/meta-odontorise.env; set +a
+curl -s -G "https://graph.facebook.com/v21.0/oauth/access_token" \
+  --data-urlencode "grant_type=fb_exchange_token" \
+  --data-urlencode "client_id=$META_APP_ID" \
+  --data-urlencode "client_secret=$META_APP_SECRET" \
+  --data-urlencode "fb_exchange_token=$META_ACCESS_TOKEN"</pre></div>
+      </div>
+      <div class="os-panel" data-os="win">
+        <p>Teste 1, o token é seu (deve responder com o seu nome e um identificador):</p>
+        <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>$env_ = Get-Content $HOME\OdontoRise\credentials\meta-odontorise.env | ConvertFrom-StringData
+Invoke-RestMethod "https://graph.facebook.com/v21.0/me?access_token=$($env_.META_ACCESS_TOKEN)"</pre></div>
+        <p>Teste 2, você enxerga os seus clientes (deve listar as contas de anúncio que o administrador atribuiu a você; se a lista vier vazia, a parte 1 não foi feita):</p>
+        <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>$u = "https://graph.facebook.com/v21.0/me/adaccounts?fields=name,account_id&amp;access_token=$($env_.META_ACCESS_TOKEN)"
+(Invoke-RestMethod $u).data</pre></div>
+        <p><strong>Teste 3, a conferência completa</strong> (quando a skill Meta já estiver na sua máquina, passo 5): no chat do Claude, peça <em>"rode o setup da skill Meta"</em>. Ele confere programas, arquivo de credencial, validade do token, as nove permissões e as contas que você enxerga, e lista o que falta com a parte do guia para resolver. Repita sempre que algo parar de funcionar.</p>
+        <p>Só se o botão <strong>Estender token de acesso</strong> não apareceu na parte 3: salve o token curto na primeira linha do arquivo, rode o comando abaixo e troque a primeira linha pelo valor de <code>access_token</code> da resposta (<code>expires_in</code> vem em segundos: 5183944 são 60 dias).</p>
+        <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>$env_ = Get-Content $HOME\OdontoRise\credentials\meta-odontorise.env | ConvertFrom-StringData
+$u = "https://graph.facebook.com/v21.0/oauth/access_token?grant_type=fb_exchange_token"
+$u += "&amp;client_id=$($env_.META_APP_ID)&amp;client_secret=$($env_.META_APP_SECRET)"
+$u += "&amp;fb_exchange_token=$($env_.META_ACCESS_TOKEN)"
+Invoke-RestMethod $u</pre></div>
+      </div>
+
+      <h3>A renovação a cada 60 dias</h3>
+      <p>Seu token vence em 60 dias. Renovar é repetir a parte 3 e trocar a primeira linha do arquivo: 5 minutos, sem administrador. Crie agora um lembrete no seu Google Calendar para daqui a 50 dias, repetindo a cada 50 dias. Se trocar a senha do Facebook, o token cai na hora: repita a parte 3 no mesmo dia.</p>
+      <div class="callout"><span class="ico">💡</span><div>Para saber quando o seu token vence, cole-o na Ferramenta de depuração e leia a linha <strong>Expira</strong>. A skill <code>/conectar-meta</code>, na versão do pacote, vai mostrar essa data sozinha.</div></div>
+
+      <div class="callout warn"><span class="ico">⚠️</span><div>Em 27/09/2026 a skill <code>/conectar-meta</code> ainda lê o arquivo de credencial antigo, no caminho da conta do Lucas: não use para validar. A versão que lê <code>~/OdontoRise/credentials/</code> e mostra a validade do token entra com o pacote de skills; até lá, os testes são os comandos acima.</div></div>
+      <div class="callout danger"><span class="ico">🔒</span><div>O token é seu. Não cole em nota, print, WhatsApp, Drive ou no chat do Claude. Se vazar: no Explorador, menu <strong>Usuário ou Página → Desinstalar app</strong>, que destrói o token na hora; depois, em <strong>Configurações do app → Básico</strong>, redefina a chave secreta, e gere um token novo pela parte 3.</div></div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="step" id="p7" data-step="p7">
+    <div class="step-head">
+      <button class="step-check" type="button" role="checkbox" aria-checked="false" aria-label="Marcar passo 7 como concluído"><span class="num">7</span></button>
+      <div><h2>Google Ads dentro do Claude</h2><p class="desc">Todo gestor conecta o Google Ads também. Não existe conector pronto no claude.ai; o caminho é o servidor oficial do Google, ligado à conta gerenciadora da OdontoRise.</p></div>
+    </div>
+    <div class="card">
+      <p>O Google publicou um servidor MCP oficial do Google Ads. Ele roda na sua máquina e precisa de três coisas: o <strong>token de desenvolvedor</strong> da conta gerenciadora da OdontoRise (o administrador fornece), o <strong>seu login Google</strong> com acesso às contas dos seus clientes dentro da gerenciadora, e o Python do passo 3.</p>
+      <ol>
+        <li><strong>O administrador faz:</strong> dá ao seu e-mail acesso às contas dos seus clientes na conta gerenciadora do Google Ads e entrega o token de desenvolvedor por canal seguro.</li>
+        <li><strong>Você faz</strong> (quando o item 1 estiver pronto): instala o servidor, faz login com a sua conta Google e guarda a credencial em <code>~/OdontoRise/credentials/google-ads-odontorise.env</code>, com permissão só sua.</li>
+      </ol>
+      <div class="callout warn"><span class="ico">⚠️</span><div>Em 28/09/2026 os acessos da conta gerenciadora ainda estão sendo ajustados. Até o administrador liberar, marque este passo como concluído e siga: o Meta não depende dele. O passo a passo detalhado entra neste guia quando o acesso estiver pronto.</div></div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="step" id="p8" data-step="p8">
+    <div class="step-head">
+      <button class="step-check" type="button" role="checkbox" aria-checked="false" aria-label="Marcar passo 8 como concluído"><span class="num">8</span></button>
+      <div><h2>Conectores: ClickUp, Drive, Calendar, Gmail</h2><p class="desc">Conector é um aplicativo que você liga ao Claude para ele enxergar outra ferramenta. Cada um se conecta uma vez, com a sua conta.</p></div>
+    </div>
+    <div class="card">
+      <div class="callout"><span class="ico">💡</span><div><strong>Como funciona:</strong> o conector não dá ao Claude nenhum poder novo sobre a ferramenta. Ele passa a enxergar exatamente o que <strong>você</strong> já enxerga, com a sua conta. Se você não vê uma pasta no Drive, o Claude também não vê.</div></div>
+
+      <h3>Antes: o administrador libera (uma vez, para a agência toda)</h3>
+      <p>Cada conector precisa ser liberado pelo administrador da organização antes de aparecer para você. Ele faz isso nas configurações de administrador do claude.ai, na seção de conectores, procurando o conector e adicionando à equipe.</p>
+      <div class="callout warn"><span class="ico">⚠️</span><div>Se ao procurar um conector você vir a opção de <strong>solicitar</strong> em vez de <strong>conectar</strong>, é porque ele ainda não foi liberado. Clique em solicitar: o administrador recebe o pedido. Em 21/09/2026, o Meta e o Gmail ainda não estavam liberados na organização da OdontoRise.</div></div>
+
+      <h3>O caminho, igual para todos</h3>
+      <ol>
+        <li>Abra <strong>claude.ai</strong> no navegador e entre com o seu e-mail @odontorise.com.</li>
+        <li>No menu lateral, abra as configurações e vá até <strong>Conectores</strong>.</li>
+        <li>Ache o conector na lista e clique em <strong>conectar</strong>.</li>
+        <li>Abre a tela de login do serviço. Entre com a conta certa (veja a tabela abaixo).</li>
+        <li>Leia o que está sendo autorizado e confirme.</li>
+        <li>Volte ao Claude. O conector deve aparecer como conectado.</li>
+      </ol>
+
+      <div class="callout ok"><span class="ico">✅</span><div><strong>Você não precisa conectar duas vezes.</strong> A autorização fica na sua conta do Claude, não no seu computador. Conectou no navegador, já vale no VS Code. Trocou de computador, continua valendo. Só precisa refazer se desconectar ou se a autorização expirar.</div></div>
+
+      <h3>Um a um</h3>
+      <div class="tbl"><table>
+        <tr><th>Conector</th><th>Entre com</th><th>Para que serve na operação</th><th>Teste depois de conectar</th></tr>
+        <tr>
+          <td><strong>ClickUp</strong></td>
+          <td>sua conta do ClickUp, a mesma que você usa no dia a dia</td>
+          <td>tarefas, comentários, as rotinas (Feedback Day, Monitoramento de Saldo) e os documentos dos clientes</td>
+          <td>peça no chat: <em>quais tarefas eu tenho abertas no ClickUp</em></td>
+        </tr>
+        <tr>
+          <td><strong>Google Drive</strong></td>
+          <td>sua conta @odontorise.com, nunca a pessoal</td>
+          <td>a pasta de cada cliente, planilhas e material de kick-off</td>
+          <td><em>procure no meu Drive a pasta de um cliente</em></td>
+        </tr>
+        <tr>
+          <td><strong>Google Calendar</strong></td>
+          <td>a mesma conta @odontorise.com</td>
+          <td>agendar reunião com cliente e ver a sua agenda</td>
+          <td><em>qual é o meu próximo compromisso</em></td>
+        </tr>
+        <tr>
+          <td><strong>Gmail</strong></td>
+          <td>a mesma conta @odontorise.com</td>
+          <td>e-mails de onboarding e cobrança. O Claude escreve o rascunho, você envia</td>
+          <td><em>procure os e-mails mais recentes de um cliente</em></td>
+        </tr>
+      </table></div>
+
+      <div class="callout warn"><span class="ico">⚠️</span><div><strong>ClickUp, detalhe que importa:</strong> o workspace da OdontoRise é o <code>90171289892</code>. Toda vez que o Claude perguntar de qual workspace se trata, é esse. Em 21/09/2026 o conector respondia "not authorized" para alguns comandos, porque o aplicativo precisa ser reaprovado pelo administrador do ClickUp. Enquanto isso não acontece, as skills usam um token pessoal: no ClickUp, abra seu perfil, vá em configurações, aplicativos, e gere o token de API. Salve em <code>~/OdontoRise/credentials/clickup-odontorise.env</code> na linha <code>CLICKUP_TOKEN=</code>. O token fica visível para copiar depois; <strong>nunca clique em gerar de novo</strong>, isso invalida o anterior e derruba o que dependia dele.</div></div>
+
+      <h3>Se algo der errado</h3>
+      <div class="tbl"><table>
+        <tr><th>Sintoma</th><th>O que fazer</th></tr>
+        <tr><td>O conector não aparece na lista</td><td>o administrador ainda não liberou. Peça a liberação</td></tr>
+        <tr><td>Aparece a opção de solicitar, não de conectar</td><td>mesma coisa: clique em solicitar e avise o administrador</td></tr>
+        <tr><td>Conectei com a conta errada</td><td>desconecte e conecte de novo escolhendo a conta @odontorise.com na tela do Google</td></tr>
+        <tr><td>Conecta, mas o Claude diz que não tem acesso a algo</td><td>a sua conta no serviço não tem esse acesso. Resolva no serviço primeiro, depois reconecte</td></tr>
+        <tr><td>Parou de funcionar depois de um tempo</td><td>a autorização expirou. Desconecte e conecte de novo</td></tr>
+      </table></div>
+
+      <div class="callout danger"><span class="ico">🔒</span><div><strong>Ao sair da empresa, ou se quiser cortar o acesso de verdade:</strong> desconectar dentro do Claude não basta. É preciso remover a autorização também no serviço: nas permissões da conta Google, nas integrações do ClickUp e nos aplicativos conectados do Facebook.</div></div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="step" id="p9" data-step="p9">
+    <div class="step-head">
+      <button class="step-check" type="button" role="checkbox" aria-checked="false" aria-label="Marcar passo 9 como concluído"><span class="num">9</span></button>
+      <div><h2>Memória: o que o Claude lembra entre sessões</h2><p class="desc">Leia e marque como concluído. Não há nada a instalar.</p></div>
+    </div>
+    <div class="card">
+      <ul>
+        <li>O Claude Code guarda o que aprende com você em arquivos de texto na sua máquina. Essa memória é só sua e começa vazia.</li>
+        <li>O conhecimento sobre cada cliente vem do <strong>ClickUp</strong>: a skill de cadastro lê o Perfil de Clientes e monta o seu cadastro local. Cliente novo na sua carteira: peça <em>"cadastra o cliente X"</em> e o Claude passa a conhecê-lo.</li>
+        <li>Particularidade de um cliente (procedimento que não pode aparecer, pedido específico) você ensina uma vez: <em>"lembre que na clínica X nunca falamos de implante"</em>. Fica na sua memória e vale nas próximas sessões.</li>
+        <li>Sua preferência pessoal (tom, atalhos, "não gosto de X") vai no seu <code>~/.claude/CLAUDE.md</code>.</li>
+        <li><strong>Segredo nunca entra na memória.</strong> Token e senha só em <code>~/OdontoRise/credentials/</code>. Na memória, só o nome do arquivo.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="step" id="p10" data-step="p10">
+    <div class="step-head">
+      <button class="step-check" type="button" role="checkbox" aria-checked="false" aria-label="Marcar passo 10 como concluído"><span class="num">10</span></button>
+      <div><h2>Teste de fumaça com dado real</h2><p class="desc">Dois pedidos no chat do Claude, com a pasta OdontoRise aberta. Se os dois responderem, o seu ambiente está pronto.</p></div>
+    </div>
+    <div class="card">
+      <ol>
+        <li><em>"Rode o setup da skill Meta."</em> Resultado esperado: a conferência do ambiente termina em <strong>TUDO PRONTO</strong>, com o seu nome e a quantidade de contas que você enxerga. Se terminar em AINDA NÃO, a lista numerada diz o que falta e em qual parte do passo 6 resolver.</li>
+        <li><em>"Cadastra o cliente NOME."</em> Use um cliente da sua carteira. Resultado esperado: o Claude acha o perfil no ClickUp, mostra cidade, especialidade e Instagram, e pergunta qual é a conta de anúncio do Meta desse cliente. Escolha da lista e confirme.</li>
+      </ol>
+      <div class="callout"><span class="ico">💡</span><div>Se o primeiro pedido disser que a skill não existe, volte ao passo 5: as skills compartilhadas precisam estar ativadas no claude.ai. Se o segundo não achar o cliente, confira o nome no Perfil de Clientes do ClickUp.</div></div>
+    </div>
+  </section>
+
+  <div class="divider"><h2>Regras que valem para todo mundo</h2></div>
+  <div class="card">
+    <ol>
+      <li><strong>Nada é executado sem OK explícito.</strong> O Claude analisa, apresenta sugestões numeradas e só faz o que você aprovar, item por item. OK em uma conta não vale para outra.</li>
+      <li><strong>Todo anúncio novo nasce pausado.</strong> Ativar é decisão sua, depois de conferir.</li>
+      <li><strong>Antes de pausar, cruzar 30, 14 e 7 dias por anúncio.</strong> Só sai quem está ruim nas três janelas.</li>
+      <li><strong>Nunca sugerir posicionamento no Facebook nem ampliar o raio.</strong> Escala vem de criativo, verba e público.</li>
+      <li><strong>Anúncio de conta de cliente é sempre para o paciente final.</strong> Vídeo de mentoria, curso ou B2B não sobe.</li>
+      <li><strong>Segredo nunca entra em nota, memória, print, WhatsApp ou Drive.</strong></li>
+    </ol>
+  </div>
+
+  <div class="divider"><h2>Solução de problemas</h2></div>
+  <div class="card">
+    <div class="tbl"><table>
+      <tr><th>Sintoma</th><th>Causa provável</th><th>O que fazer</th></tr>
+      <tr><td>"Sign in" não conclui ou pede plano</td><td>seu e-mail ainda não tem assento na organização</td><td>pedir ao administrador da org Claude Team que envie o convite</td></tr>
+      <tr><td>Digito <code>/skills</code> e as skills da OdontoRise não aparecem</td><td>skills compartilhadas ainda não ativadas no claude.ai, ou painel aberto antes da sincronização</td><td>claude.ai → Personalizar → Skills → ativar; fechar e reabrir o painel do Claude (passo 5)</td></tr>
+      <tr><td><code>python3: command not found</code> (Mac)</td><td>Homebrew ou Python não instalados, ou terminal não reaberto</td><td>repetir o passo 3; fechar e reabrir o terminal</td></tr>
+      <tr><td><code>externally-managed-environment</code> no pip</td><td>Python do Homebrew protege os pacotes do sistema</td><td>acrescentar <code>--break-system-packages</code> ao comando do pip</td></tr>
+      <tr><td>Meta responde <code>OAuthException</code> / código 190</td><td>token colado errado, com espaço, ou revogado</td><td>refazer a parte 3 do passo 6 e colar o token novo na primeira linha do arquivo</td></tr>
+      <tr><td>O meu aplicativo não aparece no Explorador</td><td>você entrou no Facebook com outra conta, ou ainda não virou desenvolvedor</td><td>entrar com a conta que criou o app; passo 6, parte 2, itens 1 e 2</td></tr>
+      <tr><td>Meta responde <code>(#200)</code> ou "não tem permissão" numa conta de cliente</td><td>a conta não foi atribuída a você na BM, ou a permissão não foi marcada no token</td><td>admin atribui a conta (passo 6, parte 1); conferir as nove permissões e gerar token novo</td></tr>
+      <tr><td>O app foi bloqueado ou restringido pelo Meta logo depois de publicar</td><td>a URL da Política de Privacidade aponta para Instagram ou para uma página que não é de um site</td><td>trocar pela política gerada em termsfeed.com ou pela página do site da OdontoRise (passo 6, parte 2, item 6) e pedir a revisão no painel do app</td></tr>
+      <tr><td>Subir anúncio falha com o erro <code>1885183</code> ("app em modo de desenvolvimento")</td><td>o app ainda não foi publicado</td><td>publicar o app (passo 6, parte 2, item 6); a leitura funciona mesmo sem isso</td></tr>
+      <tr><td>Conta do cliente não aparece</td><td>conta não atribuída a você, ou está em Business Manager própria do cliente</td><td>admin atribui a conta; se a conta é de BM do cliente, o admin daquela BM precisa compartilhar</td></tr>
+      <tr><td>ClickUp: "Team not authorized"</td><td>app do conector não aprovado no workspace</td><td>admin do workspace aprova; enquanto isso, token pessoal (passo 8)</td></tr>
+      <tr><td>Claude ignora as regras da casa</td><td>pasta aberta fora de <code>~/OdontoRise</code> (Desktop, Downloads) ou zip descompactado com pasta duplicada (<code>OdontoRise/OdontoRise</code>)</td><td>abrir a pasta <code>OdontoRise</code> certa, a que tem o <code>CLAUDE.md</code> na raiz</td></tr>
+    </table></div>
+  </div>
+
+  <div class="divider"><h2>Checklist de saída</h2></div>
+  <div class="card checklist">
+    <label><input type="checkbox" data-check="c1"> VS Code abre a pasta <code>OdontoRise</code> e o painel do Claude mostra o chat com o meu e-mail @odontorise.com</label>
+    <label><input type="checkbox" data-check="c2"> <code>git --version</code> e <code>python3 --version</code> respondem no terminal</label>
+    <label><input type="checkbox" data-check="c3"> <code>/skills</code> no chat mostra as skills da OdontoRise no grupo claude.ai sync</label>
+    <label><input type="checkbox" data-check="c4"> <code>~/OdontoRise/credentials/meta-odontorise.env</code> existe com o ID e a chave secreta do meu aplicativo e o meu token de 60 dias, e os dois testes do passo 6 responderam (meu nome e as contas dos meus clientes)</label>
+    <label><input type="checkbox" data-check="c5"> Token pessoal do ClickUp salvo em <code>~/OdontoRise/credentials/clickup-odontorise.env</code> e conector ClickUp conectado no claude.ai (o Meta, quando o admin da org liberar)</label>
+    <label><input type="checkbox" data-check="c6"> O setup da skill Meta terminou em TUDO PRONTO e um cliente meu foi cadastrado a partir do ClickUp</label>
+  </div>
+
+  <div class="next"><h3>Próximo passo</h3>Vá para a página do seu papel. Gestores, Head e CS estão em construção neste guia; até ficarem prontas, as regras acima e o <code>CLAUDE.md</code> do workspace já valem.</div>
+</main>
+
+<footer class="footer">Guia interno OdontoRise, mantido por Lucas Teles. Versão 0.2 de 28/09/2026. Sem tracking, sem dependência externa.</footer>
+<button class="btt" type="button" aria-label="Voltar ao topo">↑</button>
+<script src="../assets/js/guia.js"></script>
+</body>
+</html>
