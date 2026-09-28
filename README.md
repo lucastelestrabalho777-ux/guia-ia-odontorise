@@ -23,15 +23,12 @@ cd "/Users/lucasteles/Claude Code/guia-ia-odontorise" && python3 -m http.server 
 
 ```bash
 cd "/Users/lucasteles/Claude Code/guia-ia-odontorise"
-vercel link                                   # 1ª vez: cria/vincula o projeto guia-ia-odontorise no escopo Vercel do Lucas
-vercel env add GUIA_USER production           # usuário do Basic Auth
-vercel env add GUIA_PASS production           # senha do Basic Auth (não usar 'preview': bug da CLI 54.14.0)
-vercel --prod --yes                           # deploy (2 a 4 s)
+vercel --prod --yes                           # deploy (2 a 4 s); o projeto já está vinculado
 ```
 
-Verificar: `curl -I https://guia-ia-odontorise.vercel.app/` deve dar 401 sem credencial e 200 com `-u usuario:senha`; `README.md` deve dar 404; toda página tem `noindex`.
+Verificar: `curl -I https://guia-ia-odontorise.vercel.app/` deve dar 200; `README.md` deve dar 404; toda página tem `noindex`.
 
-Usuário e senha do Basic Auth ficam no diretório de credenciais do Lucas (fora desta pasta) e nas variáveis da Vercel. Nunca dentro desta pasta. Senha sem acento evita surpresa com codificação.
+O guia é público pelo link, sem senha (decisão de 28/09/2026) e sem indexação por buscadores.
 
 ## O que nunca entra aqui
 
