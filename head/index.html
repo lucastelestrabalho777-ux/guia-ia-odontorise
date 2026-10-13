@@ -32,6 +32,19 @@
   <p class="intro">O head não opera conta de anúncio. As skills dele leem os resultados de todos os gestores, apontam onde a estratégia precisa mudar e preparam a conversa com o cliente.</p>
   <div class="callout warn"><span class="ico">⚠️</span><div><strong>O head faz o mesmo Onboarding do gestor</strong>, incluindo o aplicativo e o token do Meta (passo 6) e o token do ClickUp (passo 8): as skills de carteira leem as contas de anúncio de todos os clientes. Depois do Onboarding, cadastre a carteira inteira pedindo ao Claude "lista os clientes do gestor X" e, em seguida, "cadastra todos", gestor por gestor. A conta Meta de cada cliente é confirmada no cadastro.</div></div>
 
+  <div class="divider"><h2>Instalação do head</h2></div>
+  <div class="card">
+    <p>O head instala o pacote completo, o mesmo dos gestores (Onboarding, passo 4): ele já traz as skills do head e as dos gestores.</p>
+    <div class="os-tabs" role="radiogroup" aria-label="Sistema operacional"><button type="button" data-os="mac" role="radio" aria-checked="false">macOS</button><button type="button" data-os="win" role="radio" aria-checked="false">Windows</button></div>
+    <div class="os-panel" data-os="mac">
+      <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre>curl -fsSL https://raw.githubusercontent.com/lucastelestrabalho777-ux/meta-ads-odontorise/main/instalar.sh | bash</pre></div>
+    </div>
+    <div class="os-panel" data-os="win">
+      <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>irm https://raw.githubusercontent.com/lucastelestrabalho777-ux/meta-ads-odontorise/main/instalar.ps1 | iex</pre></div>
+    </div>
+    <p>Depois, siga o Onboarding a partir do passo 5, com o Meta (passo 6) e o ClickUp (passo 8). Para atualizar, digite <code>/atualizar-git-odontorise</code> no Claude.</p>
+  </div>
+
   <div class="divider"><h2>Skills do head</h2></div>
   <div class="skills">
       <div class="skill"><div class="cmd">/clientes-criticos</div><div class="what">Analisa os clientes em alerta: o que já foi feito, quem está com a ação pendente, há quantos dias, e o texto para cobrar a pessoa certa.</div></div>
@@ -51,7 +64,7 @@
   <div class="callout warn"><span class="ico">⚠️</span><div><strong>A skill só começa com 4 respostas.</strong> 1. Nicho do cliente (procedimento principal: lentes, implantes, protocolo, HOF). 2. Instagram do cliente. 3. Região: a cidade do cliente, até 5 km da clínica (padrão da casa; mais que isso, o Claude avisa que aumenta o volume de coleta). Só concorrentes com o mesmo procedimento; rede fora do foco com 100 ou mais anúncios entra em seção própria, "Concorrente de outros serviços". 4. Referências ou concorrentes que o cliente já citou (arrobas, prints, nomes de clínica). O que estiver no cadastro do cliente o Claude já usa; o resto ele pergunta.</div></div>
   <div class="callout"><span class="ico">🔌</span><div><strong>Apify é opcional e o token é pessoal (atualizado em 07/10/2026).</strong> É a plataforma que roda os robôs de coleta (Biblioteca de Anúncios, Google Maps, Instagram). Sem conta, a skill coleta a Biblioteca pelo navegador (Playwright + Chromium, instalados pelo instalador do pacote) e o documento sai do mesmo jeito; só as fichas do Google e os seguidores dependem do Apify. O token é de uso só de quem o criou: a skill bloqueia token de outra pessoa, inclusive o do Lucas. Para conectar a sua conta: 1. Crie a conta em <a href="https://console.apify.com" target="_blank" rel="noopener">console.apify.com</a> com o e-mail @odontorise.com. 2. Em Settings, API &amp; Integrations, copie o Personal API token. 3. Crie o arquivo <code>~/OdontoRise/credentials/apify-odontorise.env</code> com a linha <code>APIFY_TOKEN=</code> seguida do token, e no Mac rode <code>chmod 600</code> nele. 4. Teste no Claude: "confere a conexão com o Apify". O Apify cobra por uso; antes de cada coleta o Claude diz quantas páginas vai rodar e espera o seu OK. Saldo e plano ficam no console da conta.</div></div>
 
-  <div class="callout"><span class="ico">🗓️</span><div><strong>Atualizações desta página.</strong> 07/10/2026: /raio-x-concorrentes com rota sem Apify, trava de token pessoal, regra de 5 km e seção "Concorrente de outros serviços"; aberto também aos gestores. 06/10/2026: /contas-criticas e /preparar-onboarding.</div></div>
+  <div class="callout"><span class="ico">🗓️</span><div><strong>Atualizações desta página.</strong> 13/10/2026: comando de instalação do head nesta página. 07/10/2026: /raio-x-concorrentes com rota sem Apify, trava de token pessoal, regra de 5 km e seção "Concorrente de outros serviços"; aberto também aos gestores. 06/10/2026: /contas-criticas e /preparar-onboarding.</div></div>
   <div class="callout"><span class="ico">💡</span><div>Reuniões, ClickUp, Drive e alertas de atendimento nos grupos ficam com o CS: veja a página CS.</div></div>
 </main>
 

@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark">
 <meta name="robots" content="noindex, nofollow">
 <title>Customer Success · Guia de IA OdontoRise</title>
-<meta name="description" content="As skills do CS: agendar e registrar reuniões, acompanhar o atendimento nos grupos e identificar clientes bem atendidos para novas ofertas ou depoimentos.">
+<meta name="description" content="As skills da CS: resumo dos clientes em alerta, clientes saudáveis, resposta no grupo, reunião e onboarding. Só leem o ClickUp e sugerem.">
 <link rel="stylesheet" href="../assets/css/guia.css">
 </head>
 <body data-page="cs">
@@ -24,23 +24,38 @@
   <div class="inner">
     <div class="badge">GUIA DE IA ODONTORISE · CS</div>
     <h1>Customer Success</h1>
-    <p class="sub">As skills do CS: agendar e registrar reuniões, acompanhar o atendimento nos grupos e identificar clientes bem atendidos para novas ofertas ou depoimentos.</p>
+    <p class="sub">As skills da CS: resumo dos clientes em alerta, clientes saudáveis, resposta no grupo, reunião e onboarding. Elas só leem o ClickUp e sugerem.</p>
   </div>
 </header>
 
 <main class="container">
-  <p class="intro">O CS não opera conta de anúncio. As skills dele organizam os entregáveis: reunião marcada, ata registrada, grupo acompanhado, cliente saudável identificado.</p>
-  <div class="divider"><h2>Skills do CS</h2></div>
+  <p class="intro">A CS não opera conta de anúncio e não usa o Meta. As skills leem o ClickUp na hora e entregam leitura, texto pronto e próximo passo sugerido, para facilitar o dia. Elas não mexem no ClickUp: não criam campo, não mudam status nem processo.</p>
+
+  <div class="divider"><h2>Instalação da CS</h2></div>
+  <div class="card">
+    <p>Siga a página <a href="../onboarding/">Onboarding</a> nos passos 1, 2, 3, 4, 5, 8, 9 e 10 (os passos 6 e 7 são do Meta e do Google Ads: marque como concluídos sem fazer nada). Em cada passo, o bloco <strong>Na CS</strong> diz o que muda. O comando de instalação da CS é este. O que muda em relação ao comando dos gestores: no Mac, o final <code>| bash -s cs</code>; no Windows, o começo <code>$env:ODR_PAPEL="cs";</code>. Use o botão Copiar para levar a linha inteira.</p>
+    <div class="os-tabs" role="radiogroup" aria-label="Sistema operacional"><button type="button" data-os="mac" role="radio" aria-checked="false">macOS</button><button type="button" data-os="win" role="radio" aria-checked="false">Windows</button></div>
+    <div class="os-panel" data-os="mac">
+      <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre>curl -fsSL https://raw.githubusercontent.com/lucastelestrabalho777-ux/meta-ads-odontorise/main/instalar.sh | bash -s cs</pre></div>
+    </div>
+    <div class="os-panel" data-os="win">
+      <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>$env:ODR_PAPEL="cs"; irm https://raw.githubusercontent.com/lucastelestrabalho777-ux/meta-ads-odontorise/main/instalar.ps1 | iex</pre></div>
+    </div>
+    <p>A CS precisa de duas conexões: o <strong>token pessoal do ClickUp</strong> (Onboarding, passo 8) e o conector do <strong>Google Calendar</strong> no claude.ai, para a /agendar-reuniao. Para atualizar, digite <code>/atualizar-git-odontorise</code> no Claude.</p>
+  </div>
+
+  <div class="divider"><h2>Skills da CS</h2></div>
   <div class="skills">
-      <div class="skill"><div class="cmd">/agendar-reuniao</div><div class="what">Marca a reunião no calendário com o cliente e registra a tarefa no ClickUp.</div></div>
-      <div class="skill"><div class="cmd">/resumo-reuniao</div><div class="what">Transcreve a gravação da reunião e escreve a ata com decisões e próximos passos.</div></div>
-      <div class="skill"><div class="cmd">/monitorar-grupo</div><div class="what">Você cola o que viu no grupo; a skill classifica, muda o Status do Projeto do cliente, registra a observação e, se for grave, abre o alerta para o gestor e a liderança.</div></div>
-      <div class="skill"><div class="cmd">/suporte-grupo</div><div class="what">Resposta pronta para dúvida ou reclamação no grupo, no tom da casa.</div></div>
-      <div class="skill"><div class="cmd">/clientes-saudaveis</div><div class="what">Quem está com resultado bom e atendimento em dia: candidatos a depoimento ou a novo serviço.</div></div>
+      <div class="skill"><div class="cmd">/clientes-criticos</div><div class="what">Visão geral e resumida dos clientes da lista Clientes em Alerta: o problema de cada um, o que já foi feito, com quem está, há quantos dias está parado. Quando falta informação, sugere com quem conversar (gestor, liderança ou quem está no alerta) e escreve a pergunta.</div></div>
+      <div class="skill"><div class="cmd">/clientes-saudaveis</div><div class="what">Quem está bem no relacionamento (satisfação boa, sem alerta, reunião mensal em dia): candidatos a depoimento ou indicação, um pedido por cliente no mês. Unidades da mesma rede contam como um cliente. Antes de qualquer pedido, a mensagem pronta para o gestor confirmar o resultado.</div></div>
+      <div class="skill"><div class="cmd">/suporte-grupo</div><div class="what">Você cola a mensagem do cliente; a skill responde cada assunto com o que o ClickUp mostra (conteúdo em produção, reunião). Resultado, saldo e anúncio ficam com o gestor; preço e contrato com a liderança, com a mensagem pronta para cada um. Nada interno vai para o grupo.</div></div>
+      <div class="skill"><div class="cmd">/agendar-reuniao</div><div class="what">Propõe horários livres na sua agenda e, com o seu OK, cria o evento com o cliente convidado. Entrega o texto para o grupo.</div></div>
+      <div class="skill"><div class="cmd">/analise-onboarding</div><div class="what">Tempo médio do onboarding, clientes em andamento com dias e progresso, etapas que mais demoram e o setor de cada uma.</div></div>
       <div class="skill"><div class="cmd">alertas de atendimento</div><div class="what">Tempo de resposta, reclamações e grupos sem engajamento, a partir dos grupos de WhatsApp. Entra quando a agência ligar o WhatsApp ao Claude.</div><div class="gain">Em breve: depende da integração com o WhatsApp</div></div>
   </div>
 
-  <div class="callout"><span class="ico">💡</span><div>As skills de reunião trabalham com a gravação em arquivo de áudio ou vídeo na sua máquina.</div></div>
+  <div class="callout"><span class="ico">💡</span><div>Resultado de anúncio não está no ClickUp. Por isso as skills da CS nunca citam número de resultado nem explicam queda: quem responde com número é o gestor do cliente. O resumo das reuniões gravadas continua com a ferramenta de gravação da OdontoRise.</div></div>
+  <div class="callout"><span class="ico">🗓️</span><div><strong>Atualizações desta página.</strong> 13/10/2026: instalação própria da CS (sem Meta), /clientes-criticos como resumo da lista Clientes em Alerta, /clientes-saudaveis e /suporte-grupo só com o ClickUp.</div></div>
 </main>
 
 <footer class="footer">Guia de IA OdontoRise. Material interno da agência.</footer>

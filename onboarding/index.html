@@ -32,10 +32,11 @@
   <div class="inner">
     <div class="badge">10 PASSOS · MAC E WINDOWS</div>
     <h1>Setup do ambiente</h1>
-    <p class="sub">Instale o VS Code, entre no Claude Code com o assento da OdontoRise, receba as skills e conecte o Meta. No fim, um teste com dado real prova que tudo funciona.</p>
+    <p class="sub">Instale o VS Code, entre no Claude Code com o assento da OdontoRise, receba as skills e conecte o Meta (a CS não usa o Meta). No fim, um teste com dado real prova que tudo funciona.</p>
     <div class="metrics">
       <div><strong>~40 min</strong>tempo estimado</div>
       <div><strong>10 passos</strong>com checkpoint</div>
+      <div><strong>8 passos</strong>no caminho da CS</div>
     </div>
   </div>
 </header>
@@ -44,6 +45,8 @@
   <p class="intro">Clique no número de cada passo para marcar como concluído. O progresso e o checklist final ficam salvos neste navegador. Os comandos aparecem na aba do seu sistema; troque de aba se precisar.</p>
 
   <div class="callout warn"><span class="ico">⚠️</span><div><strong>Antes de começar:</strong> você precisa de um assento ativo no Claude Team da OdontoRise (convite no seu e-mail @odontorise.com). Sem o assento, o login do passo 2 não funciona. Os assentos são liberados pelo administrador da organização.</div></div>
+
+  <div class="callout ok"><span class="ico">🧭</span><div><strong>Você é da CS?</strong> O seu caminho é mais curto: passos 1, 2, 3, 4, 5, 8, 9 e 10. A CS não usa o Meta nem o Google Ads, então marque os passos 6 e 7 como concluídos sem fazer nada. Nos passos 3, 4, 5, 8, 9 e 10, siga o bloco <strong>Na CS</strong>. Gestor e head fazem os 10 passos.</div></div>
 
   <!-- 1 -->
   <section class="step" id="p1" data-step="p1">
@@ -140,6 +143,7 @@ winget install Gyan.FFmpeg</pre></div>
         <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>python -m pip install --user requests python-dotenv facebook-business==26.0.2</pre></div>
         <div class="callout warn"><span class="ico">⚠️</span><div>No Windows, feche e reabra o PowerShell depois de instalar (a lista de programas que o sistema conhece só atualiza em janela nova). Se <code>python</code> não for reconhecido, reinicie o computador e tente de novo. A skill <code>/legenda-video</code> transcreve o vídeo na própria máquina: no Mac com chip Apple usa o mlx-whisper; no Windows, o faster-whisper. A instalação do motor está descrita na própria skill.</div></div>
       </div>
+      <div class="callout ok"><span class="ico">🧭</span><div><strong>Na CS:</strong> só o Git e o Python. No Mac, rode os comandos 1 e 2 e, no lugar do 3, <code>brew install python</code>; pule o 4. No Windows, só <code>winget install Git.Git</code> e <code>winget install Python.Python.3.12</code>. O instalador do passo 4 cuida do resto.</div></div>
     </div>
   </section>
 
@@ -161,6 +165,16 @@ winget install Gyan.FFmpeg</pre></div>
         <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>irm https://raw.githubusercontent.com/lucastelestrabalho777-ux/meta-ads-odontorise/main/instalar.ps1 | iex</pre></div>
       </div>
       <p>O que deve aparecer no fim: <code>biblioteca da Meta ok</code> e <code>Pronto. Próximos passos: credenciais (passo 6 e 8 do guia)</code>. Leva de 1 a 3 minutos na primeira vez.</p>
+      <h3>Na CS: o comando é outro</h3>
+      <p>A CS instala só as skills dela, sem a biblioteca da Meta e sem o navegador. Use este comando no lugar do de cima. O que muda em relação ao comando dos gestores: no Mac, o final <code>| bash -s cs</code>; no Windows, o começo <code>$env:ODR_PAPEL="cs";</code>. Use o botão Copiar para levar a linha inteira.</p>
+      <div class="os-tabs" role="radiogroup" aria-label="Sistema operacional"><button type="button" data-os="mac" role="radio" aria-checked="false">macOS</button><button type="button" data-os="win" role="radio" aria-checked="false">Windows</button></div>
+      <div class="os-panel" data-os="mac">
+        <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre>curl -fsSL https://raw.githubusercontent.com/lucastelestrabalho777-ux/meta-ads-odontorise/main/instalar.sh | bash -s cs</pre></div>
+      </div>
+      <div class="os-panel" data-os="win">
+        <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>$env:ODR_PAPEL="cs"; irm https://raw.githubusercontent.com/lucastelestrabalho777-ux/meta-ads-odontorise/main/instalar.ps1 | iex</pre></div>
+      </div>
+      <p>O que deve aparecer no fim: <code>Papel: CS</code>, <code>conexão com o ClickUp ok</code> e <code>Pronto. Próximos passos: o token do ClickUp (passo 8 do guia)</code>. Na CS, a pasta <code>~/OdontoRise</code> tem só o <code>CLAUDE.md</code> da CS e a pasta <code>credentials/</code>. O papel fica gravado: as atualizações mantêm a instalação da CS.</p>
       <div class="code"><div class="code-head"><span>o que o instalador cria</span></div><pre>~/.claude/skills/meta-ads-odontorise/   <span class="c">o pacote (skills, scripts, playbooks), baixado do GitHub</span>
 ~/.claude/skills/&lt;cada skill&gt;             <span class="c">atalhos para as skills do pacote</span>
 ~/OdontoRise/
@@ -173,7 +187,7 @@ winget install Gyan.FFmpeg</pre></div>
         <li>Abra o painel do Claude Code. Como a pasta tem um <code>CLAUDE.md</code>, o Claude já começa com as regras da casa carregadas.</li>
       </ol>
       <h3>C. Atualizar (quando a agência avisar de uma atualização)</h3>
-      <p>Rode o mesmo comando de novo. Ele atualiza o pacote no lugar; as skills mudam na hora.</p>
+      <p>Digite <code>/atualizar-git-odontorise</code> no chat do Claude, ou rode o mesmo comando de novo. Ele atualiza o pacote no lugar; as skills mudam na hora. Na CS, o papel continua CS.</p>
       <div class="callout danger"><span class="ico">🔒</span><div>Nunca coloque credencial dentro da pasta do pacote: ela é pública. Credencial vive só em <code>~/OdontoRise/credentials/</code>, criada por você nos passos 6 e 8.</div></div>
     </div>
   </section>
@@ -187,7 +201,7 @@ winget install Gyan.FFmpeg</pre></div>
     <div class="card">
       <p>Skill é um pacote de instruções e scripts que faz o Claude executar uma rotina inteira: puxar dados, cruzar, entregar pronto. A lista do que cada papel recebe está nas páginas <a href="../gestores/">Gestores</a>, <a href="../head/">Head</a> e <a href="../cs/">CS</a>.</p>
       <ol>
-        <li>No VS Code, com a pasta <code>OdontoRise</code> aberta, digite <code>/skills</code> no chat do Claude. Devem aparecer <code>meta-ads-odontorise</code>, <code>meu-dia</code>, <code>legenda-video</code>, <code>resumo-reuniao</code> e <code>agendar-reuniao</code>.</li>
+        <li>No VS Code, com a pasta <code>OdontoRise</code> aberta, digite <code>/skills</code> no chat do Claude. Devem aparecer <code>meta-ads-odontorise</code>, <code>meu-dia</code>, <code>legenda-video</code>, <code>resumo-reuniao</code> e <code>agendar-reuniao</code>. Na CS, aparecem <code>clientes-criticos</code>, <code>clientes-saudaveis</code>, <code>suporte-grupo</code>, <code>agendar-reuniao</code>, <code>analise-onboarding</code> e <code>atualizar-git-odontorise</code>. A <code>meta-ads-odontorise</code> também aparece na CS porque os scripts do ClickUp moram nela; a CS não a usa.</li>
         <li>Se não aparecerem, feche e reabra o painel do Claude. Se ainda assim faltarem, rode o comando do passo 4 de novo.</li>
       </ol>
       <h3>Como funciona por dentro</h3>
@@ -208,6 +222,7 @@ winget install Gyan.FFmpeg</pre></div>
       <div><h2>Meta dentro do Claude: seu aplicativo e seu token</h2><p class="desc">Você entra na Business Manager com a sua conta do Facebook e recebe acesso só aos seus clientes. Depois cria um aplicativo seu no painel de desenvolvedor do Meta e gera o próprio token. Renovar é com você, em 5 minutos, sem depender de ninguém.</p></div>
     </div>
     <div class="card">
+      <div class="callout ok"><span class="ico">🧭</span><div><strong>Na CS:</strong> pule este passo e marque como concluído.</div></div>
       <div class="tbl"><table>
         <tr><th></th><th>Conector Meta (MCP)</th><th>Credencial em arquivo (token seu)</th></tr>
         <tr><td>Como entra</td><td>claude.ai → Configurações → Conectores → Meta, com o seu login do Facebook</td><td>arquivo <code>~/OdontoRise/credentials/meta-odontorise.env</code> com o ID e a chave secreta do seu aplicativo e o token que você mesmo gera</td></tr>
@@ -355,6 +370,7 @@ Invoke-RestMethod $u</pre></div>
       <div><h2>Google Ads dentro do Claude</h2><p class="desc">Todo gestor conecta o Google Ads também. Não existe conector pronto no claude.ai; o caminho é o servidor oficial do Google, ligado à conta gerenciadora da OdontoRise.</p></div>
     </div>
     <div class="card">
+      <div class="callout ok"><span class="ico">🧭</span><div><strong>Na CS:</strong> pule este passo e marque como concluído.</div></div>
       <p>O Google publicou um servidor MCP oficial do Google Ads. Ele roda na sua máquina e precisa de três coisas: o <strong>token de desenvolvedor</strong> da conta gerenciadora da OdontoRise (o administrador fornece), o <strong>seu login Google</strong> com acesso às contas dos seus clientes dentro da gerenciadora, e o Python do passo 3.</p>
       <ol>
         <li><strong>O administrador faz:</strong> dá ao seu e-mail acesso às contas dos seus clientes na conta gerenciadora do Google Ads e entrega o token de desenvolvedor por canal seguro.</li>
@@ -418,7 +434,17 @@ Invoke-RestMethod $u</pre></div>
         </tr>
       </table></div>
 
-      <div class="callout warn"><span class="ico">⚠️</span><div><strong>ClickUp, detalhe que importa:</strong> o workspace da OdontoRise é o <code>90171289892</code>. Toda vez que o Claude perguntar de qual workspace se trata, é esse. Se o conector responder "not authorized", o aplicativo do conector ainda não foi aprovado no workspace pelo administrador; as skills não dependem dele, porque leem o ClickUp pelo seu token pessoal. <code>~/OdontoRise/credentials/clickup-odontorise.env</code> na linha <code>CLICKUP_TOKEN=</code>. O token fica visível para copiar depois; <strong>nunca clique em gerar de novo</strong>, isso invalida o anterior e derruba o que dependia dele.</div></div>
+      <div class="callout warn"><span class="ico">⚠️</span><div><strong>ClickUp, detalhe que importa:</strong> o workspace da OdontoRise é o <code>90171289892</code>. Toda vez que o Claude perguntar de qual workspace se trata, é esse. Se o conector responder "not authorized", o aplicativo do conector ainda não foi aprovado no workspace pelo administrador; as skills não dependem dele, porque leem o ClickUp pelo seu token pessoal (abaixo).</div></div>
+
+      <h3>Token pessoal do ClickUp (as skills usam)</h3>
+      <ol>
+        <li>No ClickUp, clique na sua foto → <strong>Settings</strong> (Configurações) → <strong>Apps</strong> → <strong>API Token</strong> → <strong>Generate</strong>. Copie o token.</li>
+        <li>No VS Code, com a pasta <code>OdontoRise</code> aberta, clique com o botão direito em <code>credentials</code> → <strong>Novo arquivo</strong> → <code>clickup-odontorise.env</code>. Escreva <code>CLICKUP_TOKEN=</code> e cole o token logo depois, sem espaço. Salve.</li>
+        <li>No Mac, rode no terminal: <code>chmod 600 ~/OdontoRise/credentials/clickup-odontorise.env</code> (deixa o arquivo legível só por você).</li>
+        <li>Teste no chat do Claude: <em>"minhas tarefas no ClickUp"</em>.</li>
+      </ol>
+      <div class="callout danger"><span class="ico">🔒</span><div>O token fica visível no ClickUp para copiar depois; <strong>nunca clique em gerar de novo</strong>, isso invalida o anterior e derruba o que dependia dele. O token não vai para print, chat do Claude, WhatsApp ou Drive.</div></div>
+      <div class="callout ok"><span class="ico">🧭</span><div><strong>Na CS:</strong> o essencial é o token pessoal do ClickUp (acima) e o conector do Google Calendar (para a /agendar-reuniao). Drive e Gmail são opcionais.</div></div>
 
       <h3>Se algo der errado</h3>
       <div class="tbl"><table>
@@ -446,6 +472,7 @@ Invoke-RestMethod $u</pre></div>
         <li>O conhecimento sobre cada cliente vem do <strong>ClickUp</strong>: a skill de cadastro lê o Perfil de Clientes e monta o seu cadastro local. Cliente novo na sua carteira: peça <em>"cadastra o cliente X"</em> e o Claude passa a conhecê-lo.</li>
         <li>Particularidade de um cliente (procedimento que não pode aparecer, pedido específico) você ensina uma vez: <em>"lembre que na clínica X nunca falamos de implante"</em>. Fica na sua memória e vale nas próximas sessões.</li>
         <li>Sua preferência pessoal (tom, atalhos, "não gosto de X") vai no seu <code>~/.claude/CLAUDE.md</code>.</li>
+        <li>Na CS não há cadastro de clientes: as skills leem o ClickUp na hora, a cada pedido.</li>
         <li><strong>Segredo nunca entra na memória.</strong> Token e senha só em <code>~/OdontoRise/credentials/</code>. Na memória, só o nome do arquivo.</li>
       </ul>
     </div>
@@ -458,11 +485,17 @@ Invoke-RestMethod $u</pre></div>
       <div><h2>Teste de fumaça com dado real</h2><p class="desc">Dois pedidos no chat do Claude, com a pasta OdontoRise aberta. Se os dois responderem, o seu ambiente está pronto.</p></div>
     </div>
     <div class="card">
+      <h3>Gestor e head</h3>
       <ol>
         <li><em>"Rode o setup da skill Meta."</em> Resultado esperado: a conferência do ambiente termina em <strong>TUDO PRONTO</strong>, com o seu nome e a quantidade de contas que você enxerga. Se terminar em AINDA NÃO, a lista numerada diz o que falta e em qual parte do passo 6 resolver.</li>
         <li><em>"Cadastra o cliente NOME."</em> Use um cliente da sua carteira. Resultado esperado: o Claude acha o perfil no ClickUp, mostra cidade, especialidade e Instagram, e pergunta qual é a conta de anúncio do Meta desse cliente. Escolha da lista e confirme.</li>
       </ol>
       <div class="callout"><span class="ico">💡</span><div>Se o primeiro pedido disser que a skill não existe, volte ao passo 4 e rode o comando de novo. Se o segundo não achar o cliente, confira o nome no Perfil de Clientes do ClickUp.</div></div>
+      <h3>Na CS</h3>
+      <ol>
+        <li><em>"Minhas tarefas no ClickUp."</em> Resultado esperado: as suas tarefas atrasadas, de hoje e da semana. Erro de token: volte ao passo 8.</li>
+        <li><em>"Resumo dos clientes em alerta."</em> Resultado esperado: a /clientes-criticos lista os clientes da lista Clientes em Alerta com o problema, o que já foi feito e o que falta saber.</li>
+      </ol>
     </div>
   </section>
 
@@ -493,6 +526,8 @@ Invoke-RestMethod $u</pre></div>
       <tr><td>Subir anúncio falha com o erro <code>1885183</code> ("app em modo de desenvolvimento")</td><td>o app ainda não foi publicado</td><td>publicar o app (passo 6, parte 2, item 6); a leitura funciona mesmo sem isso</td></tr>
       <tr><td>Conta do cliente não aparece</td><td>conta não atribuída a você, ou está em Business Manager própria do cliente</td><td>admin atribui a conta; se a conta é de BM do cliente, o admin daquela BM precisa compartilhar</td></tr>
       <tr><td>ClickUp: "Team not authorized"</td><td>app do conector não aprovado no workspace</td><td>admin do workspace aprova; enquanto isso, token pessoal (passo 8)</td></tr>
+      <tr><td>CS: <code>ModuleNotFoundError</code> ou erro de conexão nas skills</td><td>a peça <code>requests</code> do Python não instalou</td><td>rodar de novo o comando da CS do passo 4 e ler a última linha</td></tr>
+      <tr><td>CS: a skill <code>meta-ads-odontorise</code> aparece na lista</td><td>é normal: os scripts do ClickUp moram nela</td><td>nada a fazer; a CS não usa as partes do Meta</td></tr>
       <tr><td>Claude ignora as regras da casa</td><td>pasta aberta fora de <code>~/OdontoRise</code> (Desktop, Downloads) ou zip descompactado com pasta duplicada (<code>OdontoRise/OdontoRise</code>)</td><td>abrir a pasta <code>OdontoRise</code> certa, a que tem o <code>CLAUDE.md</code> na raiz</td></tr>
     </table></div>
   </div>
@@ -501,10 +536,10 @@ Invoke-RestMethod $u</pre></div>
   <div class="card checklist">
     <label><input type="checkbox" data-check="c1"> VS Code abre a pasta <code>OdontoRise</code> e o painel do Claude mostra o chat com o meu e-mail @odontorise.com</label>
     <label><input type="checkbox" data-check="c2"> <code>git --version</code> e <code>python3 --version</code> respondem no terminal</label>
-    <label><input type="checkbox" data-check="c3"> <code>/skills</code> no chat mostra meta-ads-odontorise, meu-dia, legenda-video, resumo-reuniao e agendar-reuniao</label>
-    <label><input type="checkbox" data-check="c4"> <code>~/OdontoRise/credentials/meta-odontorise.env</code> existe com o ID e a chave secreta do meu aplicativo e o meu token de 60 dias, e os dois testes do passo 6 responderam (meu nome e as contas dos meus clientes)</label>
-    <label><input type="checkbox" data-check="c5"> Token pessoal do ClickUp salvo em <code>~/OdontoRise/credentials/clickup-odontorise.env</code> e conector ClickUp conectado no claude.ai (o Meta, quando o admin da org liberar)</label>
-    <label><input type="checkbox" data-check="c6"> O setup da skill Meta terminou em TUDO PRONTO e um cliente meu foi cadastrado a partir do ClickUp</label>
+    <label><input type="checkbox" data-check="c3"> <code>/skills</code> no chat mostra as skills do meu papel (gestor e head: meta-ads-odontorise, meu-dia, legenda-video, resumo-reuniao e agendar-reuniao; CS: clientes-criticos, clientes-saudaveis, suporte-grupo e agendar-reuniao)</label>
+    <label><input type="checkbox" data-check="c4"> Gestor e head: <code>~/OdontoRise/credentials/meta-odontorise.env</code> existe com o ID e a chave secreta do meu aplicativo e o meu token de 60 dias, e os dois testes do passo 6 responderam (meu nome e as contas dos meus clientes)</label>
+    <label><input type="checkbox" data-check="c5"> Token pessoal do ClickUp salvo em <code>~/OdontoRise/credentials/clickup-odontorise.env</code> e conector ClickUp conectado no claude.ai (gestor e head: o Meta, quando o admin da org liberar; CS: o Google Calendar)</label>
+    <label><input type="checkbox" data-check="c6"> Gestor e head: o setup da skill Meta terminou em TUDO PRONTO e um cliente meu foi cadastrado a partir do ClickUp. CS: "minhas tarefas no ClickUp" e o resumo dos clientes em alerta responderam</label>
   </div>
 
   <div class="next"><h3>Próximo passo</h3>Vá para a página do seu papel: Gestores, Head ou CS. Lá estão as skills que você vai usar no dia a dia.</div>
