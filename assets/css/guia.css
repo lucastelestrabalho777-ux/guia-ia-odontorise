@@ -175,3 +175,12 @@ a.page-card:hover { transform: translateY(-2px); border-color: var(--accent); }
   .card { padding: 18px; }
   .progress .continue { display: none; }
 }
+
+/* passo a passo com prints (Conectar o Metrics) */
+.passos { list-style: none; counter-reset: p; margin: 8px 0 18px; }
+.passos > li { counter-increment: p; position: relative; padding-left: 40px; margin: 18px 0; font-size: 14px; line-height: 1.55; }
+.passos > li::before { content: counter(p); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: var(--navy); font-weight: 700; font-size: 13px; display: grid; place-items: center; }
+.shots { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; align-items: flex-start; }
+.shots figure { margin: 0; width: 280px; max-width: 100%; }
+.shots img { width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid var(--line); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.shots figcaption { font-size: 12px; color: var(--muted); margin-top: 6px; }

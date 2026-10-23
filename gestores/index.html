@@ -59,10 +59,30 @@
 
   <div class="divider" id="conectar-metrics"><h2>Conectar o Metrics</h2></div>
   <p class="intro">O Metrics registra o que acontece com o lead depois da mensagem: quanto a clínica demora para responder, quem agendou, compareceu e fechou, e de qual campanha veio. Conecte uma vez, com o seu login do Metrics. Novo em 23/10/2026.</p>
-  <div class="callout"><span class="ico">🔌</span><div><strong>Passo a passo.</strong> 1. Peça no Claude <code>/atualizar-git-odontorise</code>: as 4 skills do Metrics chegam junto. 2. No chat, digite <code>/mcp</code> e adicione um servidor: nome <code>metrics</code>, tipo HTTP, escopo do usuário (vale em qualquer pasta) e o endereço abaixo. 3. Ainda no <code>/mcp</code>, escolha <code>metrics</code> e autentique: o navegador abre no Metrics, entre com o seu login e autorize. Depois abra uma conversa nova. 4. Teste: "liste os clientes que tenho no Metrics". Tem que aparecer a lista do seu acesso.</div></div>
-  <div class="code"><div class="code-head"><span>endereço do Metrics</span><button class="copy-btn" type="button">Copiar</button></div><pre>https://metrics.app.br/api/mcp</pre></div>
-  <p>Se você instalou o comando <code>claude</code> no terminal (opcional no Onboarding), o passo 2 pode ser este comando:</p>
-  <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre>claude mcp add --transport http --scope user metrics https://metrics.app.br/api/mcp</pre></div>
+  <ol class="passos">
+    <li><strong>Atualize o pacote.</strong> Peça no Claude <code>/atualizar-git-odontorise</code>: as 4 skills do Metrics chegam junto.</li>
+    <li><strong>Adicione o servidor.</strong> No chat, digite <code>/mcp</code> e adicione um servidor: nome <code>metrics</code>, tipo HTTP, escopo do usuário (vale em qualquer pasta) e o endereço abaixo.
+      <div class="code"><div class="code-head"><span>endereço do Metrics</span><button class="copy-btn" type="button">Copiar</button></div><pre>https://metrics.app.br/api/mcp</pre></div>
+      Se você instalou o comando <code>claude</code> no terminal (opcional no Onboarding), pode usar este comando no lugar:
+      <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre>claude mcp add --transport http --scope user metrics https://metrics.app.br/api/mcp</pre></div>
+    </li>
+    <li><strong>Autentique.</strong> No <code>/mcp</code>, o <code>metrics</code> aparece com "Needs Auth". Clique nele e depois em <strong>Authenticate</strong>.
+      <div class="shots">
+        <figure><img src="../assets/img/metrics/1-lista-mcp.png" alt="Lista do /mcp com o servidor metrics marcado como Needs Auth"><figcaption>O metrics na lista do /mcp, ainda sem login.</figcaption></figure>
+        <figure><img src="../assets/img/metrics/2-authenticate.png" alt="Tela do servidor metrics com o botão Authenticate"><figcaption>Clique em Authenticate. Não use Disable nem Remove.</figcaption></figure>
+      </div>
+    </li>
+    <li><strong>Autorize no Metrics.</strong> O navegador abre no Metrics (se pedir, entre com o seu login). A tela lista o que o Claude poderá fazer: as permissões em amarelo são de escrita, e as 4 skills só leem. Em <strong>Alcance do acesso</strong>, marque <strong>Todas as minhas empresas</strong>: os clientes que entrarem depois na sua conta também ficam liberados. Clique em <strong>Autorizar</strong>.
+      <div class="shots">
+        <figure><img src="../assets/img/metrics/3-permissoes.png" alt="Tela de permissões do Metrics para o Claude Code"><figcaption>As permissões. Em amarelo, as de escrita.</figcaption></figure>
+        <figure><img src="../assets/img/metrics/4-alcance.png" alt="Alcance do acesso com Todas as minhas empresas marcada"><figcaption>Marque Todas as minhas empresas e clique em Autorizar.</figcaption></figure>
+      </div>
+    </li>
+    <li><strong>Volte ao Claude.</strong> Quando aparecer "Authentication successful", feche a aba, volte ao VS Code e abra uma conversa nova.
+      <div class="shots"><figure><img src="../assets/img/metrics/5-sucesso.png" alt="Authentication successful"><figcaption>Pronto: pode fechar a aba.</figcaption></figure></div>
+    </li>
+    <li><strong>Teste.</strong> Peça "liste os clientes que tenho no Metrics". Tem que aparecer a lista do seu acesso.</li>
+  </ol>
   <div class="callout warn"><span class="ico">⚠️</span><div><strong>O Metrics também altera dados</strong>: muda etapa do lead e dispara template no WhatsApp. As 4 skills só leem e sugerem. Se o Claude pedir para alterar algo no Metrics, a resposta é não.</div></div>
 
   <div class="divider"><h2>Skills do Metrics</h2></div>
