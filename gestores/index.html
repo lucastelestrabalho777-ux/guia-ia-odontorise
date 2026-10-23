@@ -61,14 +61,14 @@
   <p class="intro">O Metrics registra o que acontece com o lead depois da mensagem: quanto a clínica demora para responder, quem agendou, compareceu e fechou, e de qual campanha veio. Conecte uma vez, com o seu login do Metrics. Novo em 23/10/2026.</p>
   <ol class="passos">
     <li><strong>Atualize o pacote.</strong> Peça no Claude <code>/atualizar-git-odontorise</code>: as 4 skills do Metrics chegam junto.</li>
-    <li><strong>Adicione o servidor.</strong> No chat, digite <code>/mcp</code> e adicione um servidor: nome <code>metrics</code>, tipo HTTP, escopo do usuário (vale em qualquer pasta) e o endereço abaixo.
+    <li><strong>Adicione o servidor.</strong> Abra o chat do Claude, digite <code>/mcp</code> e aperte Enter. Na janela que abrir, adicione um servidor com nome <code>metrics</code>, tipo HTTP, escopo do usuário (vale em qualquer pasta) e o endereço abaixo.
       <div class="code"><div class="code-head"><span>endereço do Metrics</span><button class="copy-btn" type="button">Copiar</button></div><pre>https://metrics.app.br/api/mcp</pre></div>
       Se você instalou o comando <code>claude</code> no terminal (opcional no Onboarding), pode usar este comando no lugar:
       <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre>claude mcp add --transport http --scope user metrics https://metrics.app.br/api/mcp</pre></div>
     </li>
-    <li><strong>Autentique.</strong> No <code>/mcp</code>, o <code>metrics</code> aparece com "Needs Auth". Clique nele e depois em <strong>Authenticate</strong>.
+    <li><strong>Autentique.</strong> Abra o chat do Claude, digite <code>/mcp</code> e aperte Enter. Na lista que abrir, o <code>metrics</code> aparece com o aviso "Needs Auth" (falta o login). Clique nele e depois no botão azul <strong>Authenticate</strong>.
       <div class="shots">
-        <figure><img src="../assets/img/metrics/1-lista-mcp.png" alt="Lista do /mcp com o servidor metrics marcado como Needs Auth"><figcaption>O metrics na lista do /mcp, ainda sem login.</figcaption></figure>
+        <figure><img src="../assets/img/metrics/1-lista-mcp.png" alt="Lista do /mcp com o servidor metrics marcado como Needs Auth"><figcaption>A janela que abre quando você digita /mcp no chat: o metrics ainda sem login.</figcaption></figure>
         <figure><img src="../assets/img/metrics/2-authenticate.png" alt="Tela do servidor metrics com o botão Authenticate"><figcaption>Clique em Authenticate. Não use Disable nem Remove.</figcaption></figure>
       </div>
     </li>
