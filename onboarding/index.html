@@ -384,14 +384,14 @@ Invoke-RestMethod $u</pre></div>
       <h3>A. O administrador faz (uma vez por pessoa)</h3>
       <ol>
         <li>No Google Ads, logado na conta que administra o MCC Odontorise: <strong>Administrador → Acesso e segurança → Usuários → +</strong>, e-mail @odontorise.com da pessoa, nível de acesso <strong>Padrão</strong>. A pessoa recebe um convite por e-mail.</li>
-        <li>Envia à pessoa o arquivo <code>client_secret_odontorise.json</code> pelo mesmo canal seguro do token do Meta (gerenciador de senhas da agência). Nunca por WhatsApp, e-mail aberto ou Drive.</li>
+        <li>No Drive, compartilha o arquivo do aplicativo <code>client_secret_odontorise.json</code> com o e-mail da pessoa, como <strong>Leitor</strong>. O arquivo é um só, fica no Drive do administrador, e a pessoa baixa pelo link da parte B. Nunca por WhatsApp, e-mail aberto ou link público.</li>
       </ol>
-      <div class="callout"><span class="ico">💡</span><div>Esse arquivo identifica o aplicativo da OdontoRise na tela do Google; sozinho ele não abre conta nenhuma. O que abre as contas é a autorização que você faz na parte B, com a sua conta, e só nas contas em que o administrador colocou você.</div></div>
+      <div class="callout"><span class="ico">💡</span><div><strong>Por que esse arquivo pode ficar no Drive e um token não.</strong> O token do Meta abre as contas dos clientes direto, por isso nunca sai da sua máquina. Esse arquivo só identifica o aplicativo da OdontoRise na tela do Google; sozinho ele não abre conta nenhuma. O que abre as contas é a autorização que você faz na parte B, com a sua conta, e só nas contas em que o administrador colocou você. Mesmo assim ele não é público: só quem o administrador compartilhou consegue abrir.</div></div>
 
       <h3>B. Você faz (10 minutos, uma vez)</h3>
       <p><strong>Parte 1, aceite o convite</strong> do Google Ads que chegou no seu e-mail (o @odontorise.com, ou o que o administrador cadastrou no MCC). Depois entre em <a href="https://ads.google.com/" target="_blank" rel="noopener">ads.google.com</a> com essa conta e confira que a conta <strong>Odontorise</strong> aparece, com as contas dos clientes dentro. Se não aparecer, avise o administrador antes de seguir.</p>
 
-      <p><strong>Parte 2, guarde o arquivo</strong> que o administrador mandou (ele costuma cair em Downloads):</p>
+      <p><strong>Parte 2, baixe e guarde o arquivo do aplicativo.</strong> Abra <a href="https://drive.google.com/file/d/1XJE5tgREdvbIC4kOQinzEDT7iuiysd-D/view" target="_blank" rel="noopener">o arquivo no Drive</a> logado com a conta que o administrador compartilhou e clique no ícone de download (seta para baixo, no alto). Se o Drive pedir acesso, avise o administrador: ele compartilha com o seu e-mail. O arquivo cai em Downloads; depois rode:</p>
       <div class="os-tabs" role="radiogroup" aria-label="Sistema operacional"><button type="button" data-os="mac" role="radio" aria-checked="false">macOS</button><button type="button" data-os="win" role="radio" aria-checked="false">Windows</button></div>
       <div class="os-panel" data-os="mac">
         <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre><span class="c"># move o arquivo para a pasta de credenciais e deixa só o seu usuário ler</span>
@@ -428,7 +428,7 @@ Move-Item $HOME\Downloads\client_secret_odontorise.json $HOME\OdontoRise\credent
 
       <h3>Se parar de funcionar</h3>
       <p>Rode de novo o comando da parte 4: ele gera uma autorização nova e substitui o arquivo. Não precisa de administrador. Se o erro falar de acesso ao MCC, aí sim é com o administrador (parte A).</p>
-      <div class="callout danger"><span class="ico">🔒</span><div>O <code>.yaml</code> e o <code>.json</code> são seus e da agência: não vão por WhatsApp, e-mail, Drive, print ou chat do Claude. Ao sair da empresa, ou se desconfiar de vazamento: em <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a> remova o acesso de <strong>Gads - Odontorise</strong> e avise o administrador, que tira o seu e-mail do MCC.</div></div>
+      <div class="callout danger"><span class="ico">🔒</span><div>O <code>.yaml</code> é seu: não vai por WhatsApp, e-mail, Drive, print ou chat do Claude. O <code>.json</code> fica só no Drive do administrador e na sua pasta de credenciais; não reenvie para ninguém. Ao sair da empresa, ou se desconfiar de vazamento: em <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a> remova o acesso de <strong>Gads - Odontorise</strong> e avise o administrador, que tira o seu e-mail do MCC.</div></div>
     </div>
   </section>
 
@@ -577,7 +577,7 @@ Move-Item $HOME\Downloads\client_secret_odontorise.json $HOME\OdontoRise\credent
       <tr><td>O app foi bloqueado ou restringido pelo Meta logo depois de publicar</td><td>a URL da Política de Privacidade aponta para Instagram ou para uma página que não é de um site</td><td>trocar pela política gerada em termsfeed.com ou pela página do site da OdontoRise (passo 6, parte 2, item 6) e pedir a revisão no painel do app</td></tr>
       <tr><td>Subir anúncio falha com o erro <code>1885183</code> ("app em modo de desenvolvimento")</td><td>o app ainda não foi publicado</td><td>publicar o app (passo 6, parte 2, item 6); a leitura funciona mesmo sem isso</td></tr>
       <tr><td>Conta do cliente não aparece</td><td>conta não atribuída a você, ou está em Business Manager própria do cliente</td><td>admin atribui a conta; se a conta é de BM do cliente, o admin daquela BM precisa compartilhar</td></tr>
-      <tr><td><code>client_secret_odontorise.json</code> não encontrado</td><td>o arquivo do aplicativo não está em <code>~/OdontoRise/credentials</code></td><td>passo 7, parte B.2; se nunca recebeu o arquivo, pedir ao administrador</td></tr>
+      <tr><td><code>client_secret_odontorise.json</code> não encontrado</td><td>o arquivo do aplicativo não está em <code>~/OdontoRise/credentials</code></td><td>passo 7, parte B.2 (baixar do Drive e mover para a pasta); se o Drive pedir acesso, o administrador compartilha com o seu e-mail</td></tr>
       <tr><td>Google responde <code>USER_PERMISSION_DENIED</code> ou "não enxerga o MCC"</td><td>seu e-mail ainda não é usuário do MCC Odontorise, ou o convite não foi aceito</td><td>passo 7, parte A (administrador) e parte B.1 (aceitar o convite)</td></tr>
       <tr><td>A aba do Google não abre e o terminal fica parado</td><td>o navegador padrão não respondeu</td><td>copiar o link que o terminal mostra e colar no navegador; concluir até "Permitir"</td></tr>
       <tr><td>Google responde <code>invalid_grant</code></td><td>autorização revogada ou 6 meses sem uso</td><td>rodar de novo o comando do passo 7, parte B.4</td></tr>
