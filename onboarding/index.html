@@ -32,7 +32,7 @@
   <div class="inner">
     <div class="badge">10 PASSOS · MAC E WINDOWS</div>
     <h1>Setup do ambiente</h1>
-    <p class="sub">Instale o VS Code, entre no Claude Code com o assento da OdontoRise, receba as skills e conecte o Meta (a CS não usa o Meta). No fim, um teste com dado real prova que tudo funciona.</p>
+    <p class="sub">Instale o VS Code, entre no Claude Code com o assento da OdontoRise, receba as skills e conecte o Meta e o Google Ads (a CS não usa os dois). No fim, um teste com dado real prova que tudo funciona.</p>
     <div class="metrics">
       <div><strong>~40 min</strong>tempo estimado</div>
       <div><strong>10 passos</strong>com checkpoint</div>
@@ -367,16 +367,68 @@ Invoke-RestMethod $u</pre></div>
   <section class="step" id="p7" data-step="p7">
     <div class="step-head">
       <button class="step-check" type="button" role="checkbox" aria-checked="false" aria-label="Marcar passo 7 como concluído"><span class="num">7</span></button>
-      <div><h2>Google Ads dentro do Claude</h2><p class="desc">Todo gestor conecta o Google Ads também. Não existe conector pronto no claude.ai; o caminho é o servidor oficial do Google, ligado à conta gerenciadora da OdontoRise.</p></div>
+      <div><h2>Google Ads dentro do Claude</h2><p class="desc">Todo gestor e o head conectam o Google Ads também. Não existe conector no claude.ai: é a API oficial do Google, pelo aplicativo da OdontoRise, com a sua conta Google e uma autorização que é só sua. Passo reescrito em 05/11/2026, quando o acesso foi liberado.</p></div>
     </div>
     <div class="card">
       <div class="callout ok"><span class="ico">🧭</span><div><strong>Na CS:</strong> pule este passo e marque como concluído.</div></div>
-      <p>O Google publicou um servidor MCP oficial do Google Ads. Ele roda na sua máquina e precisa de três coisas: o <strong>token de desenvolvedor</strong> da conta gerenciadora da OdontoRise (o administrador fornece), o <strong>seu login Google</strong> com acesso às contas dos seus clientes dentro da gerenciadora, e o Python do passo 3.</p>
+
+      <div class="tbl"><table>
+        <tr><th></th><th>Como funciona</th></tr>
+        <tr><td>O aplicativo</td><td>é um só, da OdontoRise, registrado no Google Cloud (projeto <code>project-gads-odontorise</code>). Diferente do Meta, ninguém cria aplicativo próprio.</td></tr>
+        <tr><td>A autorização</td><td>é sua: você entra com a conta Google que o administrador colocou no MCC (normalmente a @odontorise.com) e o Google devolve uma chave que fica só na sua máquina, em <code>~/OdontoRise/credentials/google-ads-odontorise.yaml</code>.</td></tr>
+        <tr><td>O que você enxerga</td><td>as contas de cliente ligadas à conta gerenciadora (MCC) <strong>Odontorise 4820610378</strong>, depois que o administrador colocar o seu e-mail nela. As skills continuam lendo só os clientes do seu cadastro.</td></tr>
+        <tr><td>Validade</td><td>não vence a cada 60 dias como o Meta. Só cai se você revogar, se o administrador tirar o seu acesso ou se ficar 6 meses sem uso. Refazer é rodar um comando.</td></tr>
+        <tr><td>Limite</td><td>2.880 operações por dia, <strong>somadas entre todas as pessoas da agência</strong>. Uma consulta vale 1, cada alteração individual vale 1. Ler todas as contas do MCC gasta uns 20.</td></tr>
+      </table></div>
+
+      <h3>A. O administrador faz (uma vez por pessoa)</h3>
       <ol>
-        <li><strong>O administrador faz:</strong> dá ao seu e-mail acesso às contas dos seus clientes na conta gerenciadora do Google Ads e entrega o token de desenvolvedor por canal seguro.</li>
-        <li><strong>Você faz</strong> (quando o item 1 estiver pronto): instala o servidor, faz login com a sua conta Google e guarda a credencial em <code>~/OdontoRise/credentials/google-ads-odontorise.env</code>, com permissão só sua.</li>
+        <li>No Google Ads, logado na conta que administra o MCC Odontorise: <strong>Administrador → Acesso e segurança → Usuários → +</strong>, e-mail @odontorise.com da pessoa, nível de acesso <strong>Padrão</strong>. A pessoa recebe um convite por e-mail.</li>
+        <li>Envia à pessoa o arquivo <code>client_secret_odontorise.json</code> pelo mesmo canal seguro do token do Meta (gerenciador de senhas da agência). Nunca por WhatsApp, e-mail aberto ou Drive.</li>
       </ol>
-      <div class="callout warn"><span class="ico">⚠️</span><div>Enquanto o administrador não liberar o seu acesso na conta gerenciadora, marque este passo como concluído e siga: o Meta não depende dele. O passo a passo detalhado será acrescentado a este guia quando o acesso estiver liberado.</div></div>
+      <div class="callout"><span class="ico">💡</span><div>Esse arquivo identifica o aplicativo da OdontoRise na tela do Google; sozinho ele não abre conta nenhuma. O que abre as contas é a autorização que você faz na parte B, com a sua conta, e só nas contas em que o administrador colocou você.</div></div>
+
+      <h3>B. Você faz (10 minutos, uma vez)</h3>
+      <p><strong>Parte 1, aceite o convite</strong> do Google Ads que chegou no seu e-mail (o @odontorise.com, ou o que o administrador cadastrou no MCC). Depois entre em <a href="https://ads.google.com/" target="_blank" rel="noopener">ads.google.com</a> com essa conta e confira que a conta <strong>Odontorise</strong> aparece, com as contas dos clientes dentro. Se não aparecer, avise o administrador antes de seguir.</p>
+
+      <p><strong>Parte 2, guarde o arquivo</strong> que o administrador mandou (ele costuma cair em Downloads):</p>
+      <div class="os-tabs" role="radiogroup" aria-label="Sistema operacional"><button type="button" data-os="mac" role="radio" aria-checked="false">macOS</button><button type="button" data-os="win" role="radio" aria-checked="false">Windows</button></div>
+      <div class="os-panel" data-os="mac">
+        <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre><span class="c"># move o arquivo para a pasta de credenciais e deixa só o seu usuário ler</span>
+mkdir -p ~/OdontoRise/credentials
+mv ~/Downloads/client_secret_odontorise.json ~/OdontoRise/credentials/
+chmod 600 ~/OdontoRise/credentials/client_secret_odontorise.json</pre></div>
+      </div>
+      <div class="os-panel" data-os="win">
+        <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre><span class="c"># move o arquivo para a pasta de credenciais</span>
+mkdir $HOME\OdontoRise\credentials -Force
+Move-Item $HOME\Downloads\client_secret_odontorise.json $HOME\OdontoRise\credentials\</pre></div>
+      </div>
+
+      <p><strong>Parte 3, atualize o pacote</strong> para receber o script e a biblioteca do Google: no chat do Claude, digite <code>/atualizar-git-odontorise</code> e aperte Enter (ou rode de novo o comando do passo 4). A primeira instalação da biblioteca leva 1 a 2 minutos.</p>
+
+      <p><strong>Parte 4, autorize.</strong> Rode o comando abaixo. Ele abre uma aba do navegador: escolha a mesma conta Google que está no MCC, clique em <strong>Avançado</strong> e depois em <strong>Acessar Gads - Odontorise (não seguro)</strong>, e por fim em <strong>Permitir</strong>. Volte ao terminal.</p>
+      <div class="os-panel" data-os="mac">
+        <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre>python3 ~/.claude/skills/meta-ads-odontorise/scripts/google/conectar.py</pre></div>
+      </div>
+      <div class="os-panel" data-os="win">
+        <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>python $HOME\.claude\skills\meta-ads-odontorise\scripts\google\conectar.py</pre></div>
+      </div>
+      <div class="callout warn"><span class="ico">⚠️</span><div><strong>A tela "O Google não verificou este app" é esperada.</strong> O aplicativo é interno da agência, usado por menos de 10 pessoas, e o Google só tira esse aviso de aplicativos públicos verificados. Não é erro nem risco: o aplicativo é o da OdontoRise e a autorização pede uma coisa só, "Gerenciar suas campanhas do Google Ads". Se a aba não abrir sozinha, o terminal mostra o link para colar no navegador.</div></div>
+      <p>No fim, o script grava <code>google-ads-odontorise.yaml</code> na pasta de credenciais, com permissão só sua, e já testa: a resposta certa é <strong>MCC Odontorise (4820610378)</strong> com a lista das contas de cliente ativas.</p>
+
+      <p><strong>Teste de fumaça</strong>, a qualquer momento e sem abrir o navegador:</p>
+      <div class="os-panel" data-os="mac">
+        <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre>python3 ~/.claude/skills/meta-ads-odontorise/scripts/google/conectar.py --testar</pre></div>
+      </div>
+      <div class="os-panel" data-os="win">
+        <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>python $HOME\.claude\skills\meta-ads-odontorise\scripts\google\conectar.py --testar</pre></div>
+      </div>
+      <p>Ou, no chat do Claude, <em>"rode o setup da skill Meta"</em>: a seção 6 confere o Google Ads também. Depois disso, no chat, peça por exemplo <em>"campanhas Google do cliente X nos últimos 7 dias"</em>. Skills prontas de Google Ads chegam depois; até lá, leitura e otimização são por pedido no chat, e toda alteração continua só com o seu OK, item por item.</p>
+
+      <h3>Se parar de funcionar</h3>
+      <p>Rode de novo o comando da parte 4: ele gera uma autorização nova e substitui o arquivo. Não precisa de administrador. Se o erro falar de acesso ao MCC, aí sim é com o administrador (parte A).</p>
+      <div class="callout danger"><span class="ico">🔒</span><div>O <code>.yaml</code> e o <code>.json</code> são seus e da agência: não vão por WhatsApp, e-mail, Drive, print ou chat do Claude. Ao sair da empresa, ou se desconfiar de vazamento: em <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a> remova o acesso de <strong>Gads - Odontorise</strong> e avise o administrador, que tira o seu e-mail do MCC.</div></div>
     </div>
   </section>
 
@@ -525,6 +577,12 @@ Invoke-RestMethod $u</pre></div>
       <tr><td>O app foi bloqueado ou restringido pelo Meta logo depois de publicar</td><td>a URL da Política de Privacidade aponta para Instagram ou para uma página que não é de um site</td><td>trocar pela política gerada em termsfeed.com ou pela página do site da OdontoRise (passo 6, parte 2, item 6) e pedir a revisão no painel do app</td></tr>
       <tr><td>Subir anúncio falha com o erro <code>1885183</code> ("app em modo de desenvolvimento")</td><td>o app ainda não foi publicado</td><td>publicar o app (passo 6, parte 2, item 6); a leitura funciona mesmo sem isso</td></tr>
       <tr><td>Conta do cliente não aparece</td><td>conta não atribuída a você, ou está em Business Manager própria do cliente</td><td>admin atribui a conta; se a conta é de BM do cliente, o admin daquela BM precisa compartilhar</td></tr>
+      <tr><td><code>client_secret_odontorise.json</code> não encontrado</td><td>o arquivo do aplicativo não está em <code>~/OdontoRise/credentials</code></td><td>passo 7, parte B.2; se nunca recebeu o arquivo, pedir ao administrador</td></tr>
+      <tr><td>Google responde <code>USER_PERMISSION_DENIED</code> ou "não enxerga o MCC"</td><td>seu e-mail ainda não é usuário do MCC Odontorise, ou o convite não foi aceito</td><td>passo 7, parte A (administrador) e parte B.1 (aceitar o convite)</td></tr>
+      <tr><td>A aba do Google não abre e o terminal fica parado</td><td>o navegador padrão não respondeu</td><td>copiar o link que o terminal mostra e colar no navegador; concluir até "Permitir"</td></tr>
+      <tr><td>Google responde <code>invalid_grant</code></td><td>autorização revogada ou 6 meses sem uso</td><td>rodar de novo o comando do passo 7, parte B.4</td></tr>
+      <tr><td>Google responde <code>RESOURCE_EXHAUSTED</code></td><td>a cota do dia (2.880 operações, somadas entre todas as pessoas) acabou</td><td>esperar; a janela é de 24 horas</td></tr>
+      <tr><td><code>ModuleNotFoundError: google.ads</code></td><td>a biblioteca do Google não instalou</td><td>passo 7, parte B.3 (<code>/atualizar-git-odontorise</code>); ou <code>python3 -m pip install --user google-ads</code></td></tr>
       <tr><td>ClickUp: "Team not authorized"</td><td>app do conector não aprovado no workspace</td><td>admin do workspace aprova; enquanto isso, token pessoal (passo 8)</td></tr>
       <tr><td>CS: <code>ModuleNotFoundError</code> ou erro de conexão nas skills</td><td>a peça <code>requests</code> do Python não instalou</td><td>rodar de novo o comando da CS do passo 4 e ler a última linha</td></tr>
       <tr><td>CS: a skill <code>meta-ads-odontorise</code> aparece na lista</td><td>é normal: os scripts do ClickUp moram nela</td><td>nada a fazer; a CS não usa as partes do Meta</td></tr>
@@ -538,6 +596,7 @@ Invoke-RestMethod $u</pre></div>
     <label><input type="checkbox" data-check="c2"> <code>git --version</code> e <code>python3 --version</code> respondem no terminal</label>
     <label><input type="checkbox" data-check="c3"> <code>/skills</code> no chat mostra as skills do meu papel (gestor e head: meta-ads-odontorise, meu-dia, legenda-video, resumo-reuniao e agendar-reuniao; CS: clientes-criticos, clientes-saudaveis, suporte-grupo e agendar-reuniao)</label>
     <label><input type="checkbox" data-check="c4"> Gestor e head: <code>~/OdontoRise/credentials/meta-odontorise.env</code> existe com o ID e a chave secreta do meu aplicativo e o meu token de 60 dias, e os dois testes do passo 6 responderam (meu nome e as contas dos meus clientes)</label>
+    <label><input type="checkbox" data-check="c7"> Gestor e head: <code>~/OdontoRise/credentials/google-ads-odontorise.yaml</code> existe e o teste do passo 7 respondeu com o MCC Odontorise e as contas dos clientes</label>
     <label><input type="checkbox" data-check="c5"> Token pessoal do ClickUp salvo em <code>~/OdontoRise/credentials/clickup-odontorise.env</code> e conector ClickUp conectado no claude.ai (gestor e head: o Meta, quando o admin da org liberar; CS: o Google Calendar)</label>
     <label><input type="checkbox" data-check="c6"> Gestor e head: o setup da skill Meta terminou em TUDO PRONTO e um cliente meu foi cadastrado a partir do ClickUp. CS: "minhas tarefas no ClickUp" e o resumo dos clientes em alerta responderam</label>
   </div>
