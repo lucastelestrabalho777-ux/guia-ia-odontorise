@@ -24,12 +24,12 @@
   <div class="inner">
     <div class="badge">GUIA DE IA ODONTORISE · CS</div>
     <h1>Customer Success</h1>
-    <p class="sub">As skills da CS: resumo dos clientes em alerta, clientes saudáveis, resposta no grupo, reunião e onboarding. Elas só leem o ClickUp e sugerem.</p>
+    <p class="sub">As skills da CS: leitura dos grupos de WhatsApp, resumo dos clientes em alerta, clientes saudáveis, resposta no grupo, reunião e onboarding. Elas só leem e sugerem.</p>
   </div>
 </header>
 
 <main class="container">
-  <p class="intro">A CS não opera conta de anúncio e não usa o Meta. As skills leem o ClickUp na hora e entregam leitura, texto pronto e próximo passo sugerido, para facilitar o dia. Elas não mexem no ClickUp: não criam campo, não mudam status nem processo.</p>
+  <p class="intro">A CS não opera conta de anúncio e não usa o Meta. As skills leem o ClickUp e os grupos de WhatsApp dos clientes na hora e entregam leitura, texto pronto e próximo passo sugerido, para facilitar o dia. Elas não mexem no ClickUp (não criam campo, não mudam status nem processo) e não enviam mensagem pelo WhatsApp.</p>
 
   <div class="divider"><h2>Instalação da CS</h2></div>
   <div class="card">
@@ -41,21 +41,48 @@
     <div class="os-panel" data-os="win">
       <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>$env:ODR_PAPEL="cs"; irm https://raw.githubusercontent.com/lucastelestrabalho777-ux/meta-ads-odontorise/main/instalar.ps1 | iex</pre></div>
     </div>
-    <p>A CS precisa de duas conexões: o <strong>token pessoal do ClickUp</strong> (Onboarding, passo 8) e o conector do <strong>Google Calendar</strong> no claude.ai, para a /agendar-reuniao. Para atualizar, digite <code>/atualizar-git-odontorise</code> no Claude.</p>
+    <p>A CS precisa de três conexões: o <strong>token pessoal do ClickUp</strong> (Onboarding, passo 8), o conector do <strong>Google Calendar</strong> no claude.ai, para a /agendar-reuniao, e o <strong>WhatsApp de Suporte</strong> (abaixo), para a /grupos-clientes. Para atualizar, digite <code>/atualizar-git-odontorise</code> no Claude.</p>
+  </div>
+
+  <div class="divider"><h2>Conectar o WhatsApp de Suporte</h2></div>
+  <div class="card">
+    <p>A /grupos-clientes lê os grupos dos clientes pelo número de Suporte da agência, que fica conectado na Uazapi. Você guarda no seu computador o endereço do servidor e o token desse número. O Claude só lê: não envia mensagem, não marca conversa como lida e não altera grupo.</p>
+    <ol>
+      <li>Entre no painel da Uazapi e abra o servidor da agência. Copie a <strong>Server URL</strong> (começa com <code>https://</code>) e, na instância do número de Suporte, o <strong>token da instância</strong>. Não é o Admin Token: esse não é usado e não deve ser copiado.</li>
+      <li>No VS Code, com a pasta <code>OdontoRise</code> aberta, clique com o botão direito em <code>credentials</code> → <strong>Novo arquivo</strong> → <code>uazapi-odontorise.env</code>. Escreva as duas linhas abaixo, colando cada valor logo depois do sinal de igual, sem espaço. Salve.</li>
+    </ol>
+    <div class="code"><div class="code-head"><span>uazapi-odontorise.env</span><button class="copy-btn" type="button">Copiar</button></div><pre>UAZAPI_SERVER_URL=
+UAZAPI_INSTANCE_TOKEN=</pre></div>
+    <ol start="3">
+      <li>No Mac, rode no terminal: <code>chmod 600 ~/OdontoRise/credentials/uazapi-odontorise.env</code> (deixa o arquivo legível só por você).</li>
+      <li>Teste no chat do Claude: <em>"confere a conexão com o WhatsApp de Suporte"</em>. A resposta deve dizer que a instância está conectada e quantos grupos de cliente ela enxerga.</li>
+    </ol>
+    <div class="callout danger"><span class="ico">🔒</span><div>O token da instância também consegue enviar mensagem pelo número de Suporte. Por isso ele fica só nesse arquivo: não vai para print, chat do Claude, WhatsApp ou Drive. Se você não tem acesso ao painel da Uazapi, peça ao administrador para colar os dois valores direto no arquivo, no seu computador.</div></div>
+    <h3>Opcional: ouvir os áudios dos clientes</h3>
+    <p>Sem este passo a skill funciona e mostra os áudios como <code>[áudio]</code>. Com ele, o Claude transcreve no seu computador os áudios dos clientes que estão esperando resposta ou em alerta. O áudio não é enviado a nenhum serviço. Rode uma vez no terminal:</p>
+    <div class="os-tabs" role="radiogroup" aria-label="Sistema operacional"><button type="button" data-os="mac" role="radio" aria-checked="false">macOS</button><button type="button" data-os="win" role="radio" aria-checked="false">Windows</button></div>
+    <div class="os-panel" data-os="mac">
+      <div class="code"><div class="code-head"><span>terminal</span><button class="copy-btn" type="button">Copiar</button></div><pre>brew install ffmpeg && python3 -m venv ~/.cache/whisper-venv && ~/.cache/whisper-venv/bin/pip install mlx-whisper</pre></div>
+    </div>
+    <div class="os-panel" data-os="win">
+      <div class="code"><div class="code-head"><span>powershell</span><button class="copy-btn" type="button">Copiar</button></div><pre>winget install Gyan.FFmpeg; python -m venv $HOME\whisper-venv; & $HOME\whisper-venv\Scripts\pip install faster-whisper</pre></div>
+    </div>
+    <p>Na primeira leitura com áudio o computador baixa o modelo de transcrição (cerca de 1,5 GB), uma vez só.</p>
   </div>
 
   <div class="divider"><h2>Skills da CS</h2></div>
   <div class="skills">
+      <div class="skill"><div class="cmd">/grupos-clientes</div><div class="what">Leitura dos grupos de WhatsApp dos clientes ativos em um comando: quem está esperando resposta há mais de 40 minutos em horário útil, o que o grupo mostra dos clientes em alerta, clientes com atrito ou reclamação e clientes sem nenhuma mensagem em 7 dias. Para cada um, com quem falar (gestor ou liderança) e a mensagem interna pronta. Para ver um cliente só: "o que o cliente X falou no grupo". Leva de 2 a 4 minutos.</div><div class="gain">Precisa do WhatsApp de Suporte conectado (acima)</div></div>
       <div class="skill"><div class="cmd">/clientes-criticos</div><div class="what">Visão geral e resumida dos clientes da lista Clientes em Alerta: o problema de cada um, o que já foi feito, com quem está, há quantos dias está parado. Quando falta informação, sugere com quem conversar (gestor, liderança ou quem está no alerta) e escreve a pergunta.</div></div>
       <div class="skill"><div class="cmd">/clientes-saudaveis</div><div class="what">Quem está bem no relacionamento (satisfação boa, sem alerta, reunião mensal em dia): candidatos a depoimento ou indicação, um pedido por cliente no mês. Unidades da mesma rede contam como um cliente. Antes de qualquer pedido, a mensagem pronta para o gestor confirmar o resultado.</div></div>
       <div class="skill"><div class="cmd">/suporte-grupo</div><div class="what">Você cola a mensagem do cliente; a skill responde cada assunto com o que o ClickUp mostra (conteúdo em produção, reunião). Resultado, saldo e anúncio ficam com o gestor; preço e contrato com a liderança, com a mensagem pronta para cada um. Nada interno vai para o grupo.</div></div>
       <div class="skill"><div class="cmd">/agendar-reuniao</div><div class="what">Propõe horários livres na sua agenda e, com o seu OK, cria o evento com o cliente convidado. Entrega o texto para o grupo.</div></div>
       <div class="skill"><div class="cmd">/analise-onboarding</div><div class="what">Tempo médio do onboarding, clientes em andamento com dias e progresso, etapas que mais demoram e o setor de cada uma.</div></div>
-      <div class="skill"><div class="cmd">alertas de atendimento</div><div class="what">Tempo de resposta, reclamações e grupos sem engajamento, a partir dos grupos de WhatsApp. Entra quando a agência ligar o WhatsApp ao Claude.</div><div class="gain">Em breve: depende da integração com o WhatsApp</div></div>
   </div>
 
   <div class="callout"><span class="ico">💡</span><div>Resultado de anúncio não está no ClickUp. Por isso as skills da CS nunca citam número de resultado nem explicam queda: quem responde com número é o gestor do cliente. O resumo das reuniões gravadas continua com a ferramenta de gravação da OdontoRise.</div></div>
-  <div class="callout"><span class="ico">🗓️</span><div><strong>Atualizações desta página.</strong> 13/10/2026: instalação própria da CS (sem Meta), /clientes-criticos como resumo da lista Clientes em Alerta, /clientes-saudaveis e /suporte-grupo só com o ClickUp.</div></div>
+  <div class="callout"><span class="ico">💬</span><div><strong>O que a /grupos-clientes enxerga.</strong> Os últimos 7 dias de cada grupo, que é o que a Uazapi guarda. Texto e áudio de cliente (com o passo opcional); imagem, vídeo e documento aparecem só como aviso. O que o cliente escreveu é para você ler na tela: não vai para o ClickUp, para outro grupo nem para arquivo.</div></div>
+  <div class="callout"><span class="ico">🗓️</span><div><strong>Atualizações desta página.</strong> 12/11/2026: /grupos-clientes e a conexão com o WhatsApp de Suporte. 13/10/2026: instalação própria da CS (sem Meta), /clientes-criticos como resumo da lista Clientes em Alerta, /clientes-saudaveis e /suporte-grupo só com o ClickUp.</div></div>
 </main>
 
 <footer class="footer">Guia de IA OdontoRise. Material interno da agência.</footer>
