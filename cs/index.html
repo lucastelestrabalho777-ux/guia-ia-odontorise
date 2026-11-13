@@ -31,6 +31,19 @@
 <main class="container">
   <p class="intro">A CS não opera conta de anúncio e não usa o Meta. As skills leem o ClickUp e os grupos de WhatsApp dos clientes na hora e entregam leitura, texto pronto e próximo passo sugerido, para facilitar o dia. Elas não mexem no ClickUp (não criam campo, não mudam status nem processo) e não enviam mensagem pelo WhatsApp.</p>
 
+  <div class="divider"><h2>O que baixar</h2></div>
+  <div class="card">
+    <p>É isto que precisa estar no seu computador para as skills da CS funcionarem dentro do Claude. A ordem é a mesma da página <a href="../onboarding/">Onboarding</a>, que mostra cada passo com imagem.</p>
+    <ol>
+      <li><strong>VS Code</strong>, o programa onde o Claude roda: <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">code.visualstudio.com</a>.</li>
+      <li><strong>Extensão Claude Code</strong>: dentro do VS Code, em Extensões, procure por <em>Claude Code</em>, instale e entre com o seu assento da OdontoRise.</li>
+      <li><strong>Git</strong>, que baixa o pacote e as atualizações. No Mac: <code>xcode-select --install</code>. No Windows: <code>winget install Git.Git</code>.</li>
+      <li><strong>Python 3</strong>, que roda as skills. No Mac: <code>brew install python</code>. No Windows: <code>winget install Python.Python.3.12</code>.</li>
+      <li><strong>Pacote de skills da OdontoRise</strong>, que fica no GitHub: <a href="https://github.com/lucastelestrabalho777-ux/meta-ads-odontorise" target="_blank" rel="noopener">github.com/lucastelestrabalho777-ux/meta-ads-odontorise</a>. Você não baixa nada pelo site: o comando de instalação abaixo busca o pacote nesse endereço e liga só as skills da CS.</li>
+    </ol>
+    <p>Não precisa de conta no GitHub nem de nada do Meta ou do Google Ads. Opcional: o ffmpeg e o Whisper, só para ouvir os áudios dos clientes (mais abaixo).</p>
+  </div>
+
   <div class="divider"><h2>Instalação da CS</h2></div>
   <div class="card">
     <p>Siga a página <a href="../onboarding/">Onboarding</a> nos passos 1, 2, 3, 4, 5, 8, 9 e 10 (os passos 6 e 7 são do Meta e do Google Ads: marque como concluídos sem fazer nada). Em cada passo, o bloco <strong>Na CS</strong> diz o que muda. O comando de instalação da CS é este. O que muda em relação ao comando dos gestores: no Mac, o final <code>| bash -s cs</code>; no Windows, o começo <code>$env:ODR_PAPEL="cs";</code>. Use o botão Copiar para levar a linha inteira.</p>
@@ -82,7 +95,7 @@ UAZAPI_INSTANCE_TOKEN=</pre></div>
 
   <div class="callout"><span class="ico">💡</span><div>Resultado de anúncio não está no ClickUp. Por isso as skills da CS nunca citam número de resultado nem explicam queda: quem responde com número é o gestor do cliente. O resumo das reuniões gravadas continua com a ferramenta de gravação da OdontoRise.</div></div>
   <div class="callout"><span class="ico">💬</span><div><strong>O que a /grupos-clientes enxerga.</strong> Os últimos 7 dias de cada grupo, que é o que a Uazapi guarda. Texto e áudio de cliente (com o passo opcional); imagem, vídeo e documento aparecem só como aviso. O que o cliente escreveu é para você ler na tela: não vai para o ClickUp, para outro grupo nem para arquivo.</div></div>
-  <div class="callout"><span class="ico">🗓️</span><div><strong>Atualizações desta página.</strong> 12/11/2026: /grupos-clientes e a conexão com o WhatsApp de Suporte. 13/10/2026: instalação própria da CS (sem Meta), /clientes-criticos como resumo da lista Clientes em Alerta, /clientes-saudaveis e /suporte-grupo só com o ClickUp.</div></div>
+  <div class="callout"><span class="ico">🗓️</span><div><strong>Atualizações desta página.</strong> 13/11/2026: lista do que baixar, com o link do pacote no GitHub. 12/11/2026: /grupos-clientes e a conexão com o WhatsApp de Suporte. 13/10/2026: instalação própria da CS (sem Meta), /clientes-criticos como resumo da lista Clientes em Alerta, /clientes-saudaveis e /suporte-grupo só com o ClickUp.</div></div>
 </main>
 
 <footer class="footer">Guia de IA OdontoRise. Material interno da agência.</footer>
